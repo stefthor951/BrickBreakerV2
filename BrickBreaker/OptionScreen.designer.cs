@@ -1,6 +1,6 @@
-﻿namespace SuperSnakeGame
+﻿namespace BrickBreaker
 {
-    partial class menuButton
+    partial class OptionScreen
     {
         /// <summary> 
         /// Required designer variable.

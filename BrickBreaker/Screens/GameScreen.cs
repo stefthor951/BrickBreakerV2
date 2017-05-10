@@ -90,7 +90,7 @@ namespace BrickBreaker.Screens
             #endregion
 
             //set life counter
-            lives = 3;
+            lives = Form1.lives;
 
             
             //sets ticks since paddle hit to initialize at zero
@@ -104,7 +104,7 @@ namespace BrickBreaker.Screens
             int paddleHeight = 20;
             int paddleX = ((this.Width / 2) - (paddleWidth / 2));
             int paddleY = (this.Height - paddleHeight) - 60;
-            int paddleSpeed = 8;
+            int paddleSpeed = Form1.paddleSpeed;
             //add player 1 paddle
             paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
 
@@ -113,8 +113,8 @@ namespace BrickBreaker.Screens
             int ballY = (this.Height - paddle.height) - 80;
 
             // Creates a new ball
-            int xSpeed = 6;
-            int ySpeed = 6;
+            int xSpeed = Form1.xSpeed;
+            int ySpeed = Form1.ySpeed;
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
             balls.Add(ball);

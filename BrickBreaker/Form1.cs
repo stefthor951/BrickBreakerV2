@@ -12,7 +12,6 @@ using System.Windows.Forms;
 using BrickBreaker.Screens;
 using System.Xml;
 using System.Media;
-using SuperSnakeGame;
 using BrickBreaker;
 
 /// <summary>
@@ -48,7 +47,8 @@ namespace BrickBreaker
         //public static SoundPlayer player = new SoundPlayer(Properties.)
 
         public static List<Highscore> highscoreList = new List<Highscore>();
-        public static int currentScore;
+        public static int currentScore, paddleSpeed, lives, xSpeed, ySpeed;
+       
         // add a new comment
         
         //test comment
@@ -56,7 +56,9 @@ namespace BrickBreaker
         public Form1()
         {
             InitializeComponent();
-            SoundPlayer appearPlayer = new SoundPlayer(Properties.Resources.Alert_Appear);
+            lives = 3;
+            paddleSpeed = 10;
+            xSpeed = ySpeed = 6;
     }
 
         private void Form1_Load(object sender, EventArgs e)

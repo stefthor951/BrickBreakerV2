@@ -7,14 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BrickBreaker; 
 
-namespace SuperSnakeGame
+namespace BrickBreaker
 {
-    public partial class menuButton : UserControl
+    public partial class OptionScreen : UserControl
     {
         public static int difficulty = 0;
         
-        public menuButton()
+        public OptionScreen()
         {
             InitializeComponent();
         }
@@ -62,7 +63,7 @@ namespace SuperSnakeGame
             
             difficulty = 4;
         }
-        /*
+        
         private void button1_Click(object sender, EventArgs e)
         {
             Form f = this.FindForm();
@@ -70,39 +71,57 @@ namespace SuperSnakeGame
 
             BrickBreaker.Screens.MenuScreen ms = new BrickBreaker.Screens.MenuScreen();
             f.Controls.Add(ms);
-        }*/
+        }
         public static void Easy()
         {
-            BrickBreaker.Screens.GameScreen.lives = 5;
-            BrickBreaker.Screens.GameScreen.paddleSpeed = 12;
-            BrickBreaker.Screens.GameScreen.xSpeed = 4;
-            BrickBreaker.Screens.GameScreen.ySpeed = 4;
+            Form1.lives = 5;
+            Form1.paddleSpeed = 12;
+            Form1.xSpeed = 4;
+            Form1.ySpeed = 4;
         }
         public static void Medium()
         {
-            BrickBreaker.Screens.GameScreen.lives = 3;
-            BrickBreaker.Screens.GameScreen.paddleSpeed = 8;
-            BrickBreaker.Screens.GameScreen.xSpeed = 6;
-            BrickBreaker.Screens.GameScreen.ySpeed = 6;
+            Form1.lives = 3;
+            Form1.paddleSpeed = 8;
+            Form1.xSpeed = 6;
+            Form1.ySpeed = 6;
         }
         public static void Hard()
         {
-            BrickBreaker.Screens.GameScreen.lives = 2;
-            BrickBreaker.Screens.GameScreen.paddleSpeed = 6;
-            BrickBreaker.Screens.GameScreen.xSpeed = 8;
-            BrickBreaker.Screens.GameScreen.ySpeed = 8;
+            Form1.lives = 2;
+            Form1.paddleSpeed = 6;
+            Form1.xSpeed = 8;
+            Form1.ySpeed = 8;
         }
         public static void Impossible()
         {
-            BrickBreaker.Screens.GameScreen.lives = 1;
-            BrickBreaker.Screens.GameScreen.paddleSpeed = 4;
-            BrickBreaker.Screens.GameScreen.xSpeed = 10;
-            BrickBreaker.Screens.GameScreen.ySpeed = 10;
+            Form1.lives = 1;
+            Form1.paddleSpeed = 4;
+            Form1.xSpeed = 10;
+            Form1.ySpeed = 10;
         }
 
 
         private void acceptButton_Click(object sender, EventArgs e)
-        {
+        {   
+            switch (difficulty)
+            {
+                case 0:
+                    break;
+                case 1:
+                    Easy();
+                    break;
+                case 2:
+                    Medium();
+                    break;
+                case 3:
+                    Hard();
+                    break;
+                case 4:
+                    Impossible();
+                    break;
+            }
+
             Form f = this.FindForm();
             f.Controls.Remove(this);
 

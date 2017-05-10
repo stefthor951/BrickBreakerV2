@@ -120,7 +120,7 @@ namespace BrickBreaker.Screens
 
         private void optionLabel_Click(object sender, EventArgs e)
         {
-            SuperSnakeGame.menuButton os = new SuperSnakeGame.menuButton();
+            BrickBreaker.OptionScreen os = new BrickBreaker.OptionScreen();
             Form form = this.FindForm();
 
             form.Controls.Add(os);
