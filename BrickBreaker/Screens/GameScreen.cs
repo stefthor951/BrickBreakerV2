@@ -15,6 +15,9 @@ using System.Media;
 using BrickBreaker;
 using BrickBreaker.Screens;
 using System.Xml;
+using System.IO;
+using System.Threading;
+
 
 namespace BrickBreaker.Screens
 {
@@ -56,7 +59,7 @@ namespace BrickBreaker.Screens
         // Game values
         public static int lives, paddleSpeed, xSpeed, ySpeed, ticksSinceHit;
 
-        int currentLevel = 1;
+        int currentLevel = 1, totalLevels;
 
         string levelToLoad;
 
@@ -129,20 +132,8 @@ namespace BrickBreaker.Screens
             balls.Add(ball);
 
             //also added by Lake
-            loadLevel("level1.xml");
-            /*
-            // Creates blocks for generic level
-            blocks.Clear();
-            int x = 10;
+            loadLevel("levels\\level1.xml");
 
-            while (blocks.Count < 12)
-            {
-                x += 57;
-                Block b1 = new Block(x, 10, 1, Color.White);
-                blocks.Add(b1);
-            }
-            */
-            // start the game engine loop
             gameTimer.Enabled = true;
         }
 
@@ -387,50 +378,18 @@ namespace BrickBreaker.Screens
                         {
                             //added by Lake
                             #region Decide Wich Level To Load
+                            totalLevels = Directory.GetFiles("levels", "*.xml", SearchOption.AllDirectories).Length;
                             currentLevel++;
-
-                            switch (currentLevel)
+                            if (currentLevel <= totalLevels)
                             {
-                                case 2:
-                                    levelToLoad = "level2.xml";
-                                    break;
-                                case 3:
-                                    levelToLoad = "level3.xml";
-                                    break;
-                                case 4:
-                                    levelToLoad = "level4.xml";
-                                    break;
-                                case 5:
-                                    levelToLoad = "level5.xml";
-                                    break;
-                                case 6:
-                                    levelToLoad = "level6.xml";
-                                    break;
-                                case 7:
-                                    levelToLoad = "level7.xml";
-                                    break;
-                                case 8:
-                                    levelToLoad = "level8.xml";
-                                    break;
-                                case 9:
-                                    levelToLoad = "level9.xml";
-                                    break;
-                                case 10:
-                                    levelToLoad = "level10.xml";
-                                    break;
-                                case 11:
-                                    levelToLoad = "level11.xml";
-                                    break;
-                                case 12:
-                                    levelToLoad = "level12.xml";
-                                    break;
-                                case 13:
-                                    levelToLoad = "level13.xml";
-                                    break;
-                                case 14:
-                                    OnEnd();
-                                    break;
+                                levelToLoad = "levels\\level" + currentLevel + ".xml";
                             }
+                            else
+                            {
+                                OnEnd();
+                            }
+
+                            Thread.Sleep(1000);
 
                             loadLevel(levelToLoad);
                             ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
@@ -541,6 +500,8 @@ namespace BrickBreaker.Screens
 
         public void OnEnd()
         {
+            Thread.Sleep(1000);
+
             // Goes to the game over screen
             Form form = this.FindForm();
             LoseScreen ls = new LoseScreen();
@@ -553,8 +514,6 @@ namespace BrickBreaker.Screens
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-
-
             Image backImage = BrickBreaker.Properties.Resources.fadedBackground;
             
             Rectangle backRect = new Rectangle((0 - 400) - paddle.x, 0, this.Width * 3, this.Height);
@@ -563,16 +522,10 @@ namespace BrickBreaker.Screens
             // Draws paddle
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
             e.Graphics.DrawRectangle(ballPen, paddle.x, paddle.y, paddle.width, paddle.height);
+
             // Draws blocks
-            if (isBlindfold)
-            { 
-            /*
-                blockBrush.Color = b.colour;
-                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
-               e.Graphics.DrawRectangle(ballPen, b.x, b.y, b.width, b.height);
-               */
-            }
-            else
+            if (isBlindfold == false)
+           
             {
                 foreach (Block b in blocks)
                 {
@@ -582,6 +535,7 @@ namespace BrickBreaker.Screens
                         blockBrush.Color = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
                     }
                     e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+                    e.Graphics.DrawRectangle(ballPen, b.x, b.y, b.width, b.height);
                 }
             }
             #region Stefan and Jacks Powerups
@@ -599,16 +553,8 @@ namespace BrickBreaker.Screens
             foreach (Ball ba1 in balls)
             {
                 e.Graphics.FillRectangle(ballBrush, ba1.x, ba1.y, ba1.size, ba1.size);
-/*
-            DrawPowerups(e);
-
-            
-            // Draws balls
-            foreach (Ball b in balls)
-            {
-                e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);                           
-                e.Graphics.DrawRectangle(ballPen, b.x, b.y, b.size, b.size);
-*/
+                e.Graphics.DrawRectangle(ballPen, ba1.x, ba1.y, ba1.size, ba1.size);
+                
             }
 
         }
