@@ -481,7 +481,7 @@ namespace BrickBreaker.Screens
                 }
 
             }
-
+            
             //redraw the screen
             Refresh();
         }
@@ -703,7 +703,7 @@ namespace BrickBreaker.Screens
 
             powerUps.Clear();
         }
-        
+        //change
         #endregion
     }
 }
