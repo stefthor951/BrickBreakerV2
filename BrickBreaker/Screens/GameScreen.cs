@@ -15,7 +15,9 @@ using System.Media;
 using BrickBreaker;
 using BrickBreaker.Screens;
 using System.Xml;
+using System.IO;
 using System.Threading;
+
 
 namespace BrickBreaker.Screens
 {
@@ -57,7 +59,7 @@ namespace BrickBreaker.Screens
         // Game values
         public static int lives, paddleSpeed, xSpeed, ySpeed, ticksSinceHit;
 
-        int currentLevel = 1;
+        int currentLevel = 1, totalLevels;
 
         string levelToLoad;
 
@@ -130,20 +132,8 @@ namespace BrickBreaker.Screens
             balls.Add(ball);
 
             //also added by Lake
-            loadLevel("level1.xml");
-            /*
-            // Creates blocks for generic level
-            blocks.Clear();
-            int x = 10;
+            loadLevel("levels\\level1.xml");
 
-            while (blocks.Count < 12)
-            {
-                x += 57;
-                Block b1 = new Block(x, 10, 1, Color.White);
-                blocks.Add(b1);
-            }
-            */
-            // start the game engine loop
             gameTimer.Enabled = true;
         }
 
@@ -388,49 +378,15 @@ namespace BrickBreaker.Screens
                         {
                             //added by Lake
                             #region Decide Wich Level To Load
+                            totalLevels = Directory.GetFiles("levels", "*.xml", SearchOption.AllDirectories).Length;
                             currentLevel++;
-
-                            switch (currentLevel)
+                            if (currentLevel <= totalLevels)
                             {
-                                case 2:
-                                    levelToLoad = "level2.xml";
-                                    break;
-                                case 3:
-                                    levelToLoad = "level3.xml";
-                                    break;
-                                case 4:
-                                    levelToLoad = "level4.xml";
-                                    break;
-                                case 5:
-                                    levelToLoad = "level5.xml";
-                                    break;
-                                case 6:
-                                    levelToLoad = "level6.xml";
-                                    break;
-                                case 7:
-                                    levelToLoad = "level7.xml";
-                                    break;
-                                case 8:
-                                    levelToLoad = "level8.xml";
-                                    break;
-                                case 9:
-                                    levelToLoad = "level9.xml";
-                                    break;
-                                case 10:
-                                    levelToLoad = "level10.xml";
-                                    break;
-                                case 11:
-                                    levelToLoad = "level11.xml";
-                                    break;
-                                case 12:
-                                    levelToLoad = "level12.xml";
-                                    break;
-                                case 13:
-                                    levelToLoad = "level13.xml";
-                                    break;
-                                case 14:
-                                    OnEnd();
-                                    break;
+                                levelToLoad = "levels\\level" + currentLevel + ".xml";
+                            }
+                            else
+                            {
+                                OnEnd();
                             }
 
                             Thread.Sleep(1000);
