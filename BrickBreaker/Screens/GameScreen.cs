@@ -576,9 +576,6 @@ namespace BrickBreaker.Screens
                e.Graphics.DrawRectangle(ballPen, b.x, b.y, b.width, b.height);
                */
             }
-
-
-            }
             else
             {
                 foreach (Block b in blocks)
