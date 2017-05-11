@@ -65,6 +65,8 @@ namespace BrickBreaker.Screens
         SolidBrush ballBrush = new SolidBrush(Color.White);
         SolidBrush blockBrush = new SolidBrush(Color.Red);
 
+        Pen ballPen = new Pen(Color.Black);
+
 
         //list of all balls
         List<Ball> balls = new List<Ball>();
@@ -110,11 +112,11 @@ namespace BrickBreaker.Screens
 
             // setup starting ball values
             int ballX = ((this.Width / 2) - 10);
-            int ballY = (this.Height - paddle.height) - 80;
+            int ballY = (this.Height - paddle.height) - 120;
 
             // Creates a new ball
             int xSpeed = Form1.xSpeed;
-            int ySpeed = Form1.ySpeed;
+            int ySpeed = -Form1.ySpeed;
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
             balls.Add(ball);
@@ -300,8 +302,6 @@ namespace BrickBreaker.Screens
             {
                 ball.Move();
             }
-            // Moves powerups
-            MovePowerups(powerUps);
 
             // Check for collision with powerups and paddle
             CollidePowerUps(paddle);
@@ -502,12 +502,13 @@ namespace BrickBreaker.Screens
 
             // Draws paddle
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-
+            e.Graphics.DrawRectangle(ballPen, paddle.x, paddle.y, paddle.width, paddle.height);
             // Draws blocks
             foreach (Block b in blocks)
             {
                 blockBrush.Color = b.colour;
                 e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+               e.Graphics.DrawRectangle(ballPen, b.x, b.y, b.width, b.height);
             }
 
             #region Stefan and Jacks Powerups
@@ -522,8 +523,13 @@ namespace BrickBreaker.Screens
 
             DrawPowerups(e);
 
+            
             // Draws balls
-            e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
+            foreach (Ball b in balls)
+            {
+                e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);                           
+                e.Graphics.DrawRectangle(ballPen, b.x, b.y, b.size, b.size);
+            }
 
         }
 
