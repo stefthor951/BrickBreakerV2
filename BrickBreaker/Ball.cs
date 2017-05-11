@@ -85,6 +85,12 @@ namespace BrickBreaker
                 double f = (t / p.width);
                 theta = Math.PI * f;
 
+                //takes into account whether you are moving left or right
+                if (pMovingLeft)
+                    theta--;
+                else if (pMovingRight)
+                    theta++;
+
                 //uses trig to calculate new x and y speeds
                 xSpeed = -Math.Cos(theta) * speed * 0.5;
                 ySpeed = -Math.Sqrt(speed - Math.Abs(xSpeed));
@@ -111,10 +117,7 @@ namespace BrickBreaker
                 }
                 */
                 /*
-                if (pMovingLeft)
-                    xSpeed = -Math.Abs(xSpeed);
-                else if (pMovingRight)
-                    xSpeed = Math.Abs(xSpeed);
+                
                 */
                 //returns 0 if collision occurs, resetting the number of ticks since the last collision
                 return 0;             

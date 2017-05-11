@@ -582,6 +582,7 @@ namespace BrickBreaker.Screens
                 {
                     blockBrush.Color = b.colour;
                     e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+                    e.Graphics.DrawRectangle(ballPen, b.x, b.y, b.width, b.height);
                 }
             }
             #region Stefan and Jacks Powerups
@@ -599,16 +600,17 @@ namespace BrickBreaker.Screens
             foreach (Ball ba1 in balls)
             {
                 e.Graphics.FillRectangle(ballBrush, ba1.x, ba1.y, ba1.size, ba1.size);
-/*
-            DrawPowerups(e);
+                e.Graphics.DrawRectangle(ballPen, ba1.x, ba1.y, ba1.size, ba1.size);
+                /*
+                            DrawPowerups(e);
 
-            
-            // Draws balls
-            foreach (Ball b in balls)
-            {
-                e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);                           
-                e.Graphics.DrawRectangle(ballPen, b.x, b.y, b.size, b.size);
-*/
+
+                            // Draws balls
+                            foreach (Ball b in balls)
+                            {
+                                e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);                           
+
+                */
             }
 
         }
