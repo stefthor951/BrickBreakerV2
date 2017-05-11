@@ -37,6 +37,7 @@
             // 
             this.scoreTitle.BackColor = System.Drawing.Color.Transparent;
             this.scoreTitle.Font = new System.Drawing.Font("Kozuka Gothic Pro B", 50.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scoreTitle.ForeColor = System.Drawing.Color.DarkRed;
             this.scoreTitle.Location = new System.Drawing.Point(198, 24);
             this.scoreTitle.Name = "scoreTitle";
             this.scoreTitle.Size = new System.Drawing.Size(404, 90);
@@ -46,18 +47,20 @@
             // highscoreOutput
             // 
             this.highscoreOutput.AutoSize = true;
+            this.highscoreOutput.Font = new System.Drawing.Font("Courier New", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.highscoreOutput.Location = new System.Drawing.Point(172, 200);
             this.highscoreOutput.Name = "highscoreOutput";
-            this.highscoreOutput.Size = new System.Drawing.Size(35, 13);
+            this.highscoreOutput.Size = new System.Drawing.Size(150, 41);
             this.highscoreOutput.TabIndex = 1;
             this.highscoreOutput.Text = "label1";
             // 
             // recentScoreOutput
             // 
             this.recentScoreOutput.AutoSize = true;
+            this.recentScoreOutput.Font = new System.Drawing.Font("Courier New", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentScoreOutput.Location = new System.Drawing.Point(487, 200);
             this.recentScoreOutput.Name = "recentScoreOutput";
-            this.recentScoreOutput.Size = new System.Drawing.Size(35, 13);
+            this.recentScoreOutput.Size = new System.Drawing.Size(150, 41);
             this.recentScoreOutput.TabIndex = 2;
             this.recentScoreOutput.Text = "label1";
             // 

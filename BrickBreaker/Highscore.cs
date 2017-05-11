@@ -20,6 +20,30 @@ namespace BrickBreaker
             score = _score;
         }
 
+        public void save(Highscore hs)
+        {
+            bool scoreAdded = false;
+            //Highscore hs = new Highscore(null, Convert.ToString(Form1.currentScore)); //TODO when highscore screen is finished change null for nameLabel.text (or something like that)
+
+            for (int i = 0; i < Convert.ToInt16(Form1.highscoreList.Count); i++)
+            {
+                if (Form1.currentScore > Convert.ToInt16(Form1.highscoreList[i].score))
+                {
+                    Form1.highscoreList.Insert(i, hs);
+
+                    scoreAdded = true;
+                    i = Form1.highscoreList.Count;//this is so that it will exit the for loop if this code executes
+                }
+            }
+
+            if (scoreAdded == false)
+            {
+
+                Form1.highscoreList.Add(hs);
+            }
+
+        }
+
         public void saveScores (List<Highscore> _scoreList)
         {
             //Only saves the top 10 highscores
