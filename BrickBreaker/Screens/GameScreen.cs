@@ -698,6 +698,8 @@ namespace BrickBreaker.Screens
             isMagnetTimer = floorTimer = strongBallTimer = shroomsTimer = blindfoldTimer = 0;
             pointsMultiplier = 1;
 
+            paddle.width = 80;
+
             paddle.colour = Color.White;
             ball.colour = Color.White;
 
