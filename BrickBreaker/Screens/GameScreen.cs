@@ -15,6 +15,7 @@ using System.Media;
 using BrickBreaker;
 using BrickBreaker.Screens;
 using System.Xml;
+using System.Threading;
 
 namespace BrickBreaker.Screens
 {
@@ -545,6 +546,8 @@ namespace BrickBreaker.Screens
 
         public void OnEnd()
         {
+            Thread.Sleep(1000);
+
             // Goes to the game over screen
             Form form = this.FindForm();
             LoseScreen ls = new LoseScreen();
@@ -557,8 +560,6 @@ namespace BrickBreaker.Screens
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-
-
             Image backImage = BrickBreaker.Properties.Resources.fadedBackground;
             
             Rectangle backRect = new Rectangle((0 - 400) - paddle.x, 0, this.Width * 3, this.Height);
@@ -567,16 +568,10 @@ namespace BrickBreaker.Screens
             // Draws paddle
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
             e.Graphics.DrawRectangle(ballPen, paddle.x, paddle.y, paddle.width, paddle.height);
+
             // Draws blocks
-            if (isBlindfold)
-            { 
-            /*
-                blockBrush.Color = b.colour;
-                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
-               e.Graphics.DrawRectangle(ballPen, b.x, b.y, b.width, b.height);
-               */
-            }
-            else
+            if (isBlindfold == false)
+           
             {
                 foreach (Block b in blocks)
                 {
@@ -601,16 +596,7 @@ namespace BrickBreaker.Screens
             {
                 e.Graphics.FillRectangle(ballBrush, ba1.x, ba1.y, ba1.size, ba1.size);
                 e.Graphics.DrawRectangle(ballPen, ba1.x, ba1.y, ba1.size, ba1.size);
-                /*
-                            DrawPowerups(e);
-
-
-                            // Draws balls
-                            foreach (Ball b in balls)
-                            {
-                                e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);                           
-
-                */
+                
             }
 
         }
