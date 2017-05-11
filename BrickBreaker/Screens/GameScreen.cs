@@ -319,10 +319,6 @@ namespace BrickBreaker.Screens
                 ballBrush.Color = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
                 paddleBrush.Color = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
 
-                foreach (Block b in blocks)
-                {
-                    b.colour = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
-                }
                 shroomsTimer--;
             }
             else if (shroomsTimer <= 0 && isShrooms == true)
@@ -482,7 +478,7 @@ namespace BrickBreaker.Screens
                 }
 
             }
-
+            
             //redraw the screen
             Refresh();
         }
@@ -576,6 +572,10 @@ namespace BrickBreaker.Screens
                 foreach (Block b in blocks)
                 {
                     blockBrush.Color = b.colour;
+                    if (isShrooms)
+                    {
+                        blockBrush.Color = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
+                    }
                     e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
                     e.Graphics.DrawRectangle(ballPen, b.x, b.y, b.width, b.height);
                 }
@@ -691,7 +691,7 @@ namespace BrickBreaker.Screens
 
             powerUps.Clear();
         }
-        
+        //change
         #endregion
     }
 }
