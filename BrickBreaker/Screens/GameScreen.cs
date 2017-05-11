@@ -121,7 +121,7 @@ namespace BrickBreaker.Screens
             balls.Add(ball);
 
             //also added by Lake
-            loadLevel("levels\\level1.xml");
+            loadLevel("Thingy\\level1.xml");
 
             gameTimer.Enabled = true;
         }
@@ -323,11 +323,11 @@ namespace BrickBreaker.Screens
                         {
                             //added by Lake
                             #region Decide Wich Level To Load
-                            totalLevels = Directory.GetFiles("levels", "*.xml", SearchOption.AllDirectories).Length;
+                            totalLevels = Directory.GetFiles("Thingy", "*.xml", SearchOption.AllDirectories).Length;
                             currentLevel++;
                             if (currentLevel <= totalLevels)
                             {
-                                levelToLoad = "levels\\level" + currentLevel + ".xml";
+                                levelToLoad = "Thingy\\level" + currentLevel + ".xml";
                             }
                             else
                             {
