@@ -25,8 +25,6 @@ namespace BrickBreaker.Screens
     {
         #region global values
 
-
-
         #region Stefan and Jack's values
         // Creates powerup list
         List<PowerUp> powerUps = new List<PowerUp>();
@@ -524,8 +522,7 @@ namespace BrickBreaker.Screens
             e.Graphics.DrawRectangle(ballPen, paddle.x, paddle.y, paddle.width, paddle.height);
 
             // Draws blocks
-            if (isBlindfold == false)
-           
+            if (isBlindfold == false)         
             {
                 foreach (Block b in blocks)
                 {
@@ -548,7 +545,6 @@ namespace BrickBreaker.Screens
             }
             #endregion
 
-
             //drawBalls
             foreach (Ball ba1 in balls)
             {
@@ -556,7 +552,6 @@ namespace BrickBreaker.Screens
                 e.Graphics.DrawRectangle(ballPen, ba1.x, ba1.y, ba1.size, ba1.size);
                 
             }
-
         }
 
         #region Stefan and Jack's Powerup Methods
