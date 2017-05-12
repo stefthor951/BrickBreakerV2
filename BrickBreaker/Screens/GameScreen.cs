@@ -488,7 +488,7 @@ namespace BrickBreaker.Screens
 
             int items = 1;
             //
-            //extract info
+            //extract info  
             XmlTextReader reader = new XmlTextReader(Level);
 
             while (reader.Read())
