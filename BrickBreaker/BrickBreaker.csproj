@@ -86,6 +86,12 @@
     <Compile Include="InstructionScreen.designer.cs">
       <DependentUpon>InstructionScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoseScreenMulti.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LoseScreenMulti.Designer.cs">
+      <DependentUpon>LoseScreenMulti.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -133,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InstructionScreen.resx">
       <DependentUpon>InstructionScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoseScreenMulti.resx">
+      <DependentUpon>LoseScreenMulti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionScreen.resx">
       <DependentUpon>OptionScreen.cs</DependentUpon>
