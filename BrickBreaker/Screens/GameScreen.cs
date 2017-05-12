@@ -78,7 +78,7 @@ namespace BrickBreaker.Screens
         SolidBrush ballBrush = new SolidBrush(Color.White);
         SolidBrush blockBrush = new SolidBrush(Color.Red);
 
-        Pen ballPen = new Pen(Color.Black);
+        Pen ballPen = new Pen(Color.SlateGray);
 
 
 
