@@ -117,6 +117,16 @@ namespace BrickBreaker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blackButton {
+            get {
+                object obj = ResourceManager.GetObject("blackButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap blue_250x250 {
             get {
                 object obj = ResourceManager.GetObject("blue_250x250", resourceCulture);
@@ -176,9 +186,9 @@ namespace BrickBreaker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap joystick {
+        internal static System.Drawing.Bitmap joystick_part_2 {
             get {
-                object obj = ResourceManager.GetObject("joystick", resourceCulture);
+                object obj = ResourceManager.GetObject("joystick_part_2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,9 +196,39 @@ namespace BrickBreaker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap joystick_part_2 {
+        internal static System.Drawing.Bitmap joyStick1 {
             get {
-                object obj = ResourceManager.GetObject("joystick_part_2", resourceCulture);
+                object obj = ResourceManager.GetObject("joyStick1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap life {
+            get {
+                object obj = ResourceManager.GetObject("life", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lostLife {
+            get {
+                object obj = ResourceManager.GetObject("lostLife", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mainScreenBack {
+            get {
+                object obj = ResourceManager.GetObject("mainScreenBack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -246,6 +286,16 @@ namespace BrickBreaker.Properties {
         internal static System.IO.UnmanagedMemoryStream Select_B {
             get {
                 return ResourceManager.GetStream("Select_B", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap texture4 {
+            get {
+                object obj = ResourceManager.GetObject("texture4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

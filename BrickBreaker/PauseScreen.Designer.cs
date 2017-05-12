@@ -36,31 +36,38 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
+
             this.titleLabel.Location = new System.Drawing.Point(84, 87);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(27, 13);
+            this.titleLabel.Size = new System.Drawing.Size(220, 33);
             this.titleLabel.TabIndex = 0;
-            this.titleLabel.Text = "Title";
+            this.titleLabel.Text = "QUIT THE GAME?";
             // 
             // yesButton
             // 
-            this.yesButton.Location = new System.Drawing.Point(45, 135);
+            this.yesButton.BackColor = System.Drawing.Color.Transparent;
+            this.yesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.yesButton.Font = new System.Drawing.Font("Kozuka Gothic Pro R", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.yesButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.yesButton.Location = new System.Drawing.Point(39, 77);
             this.yesButton.Name = "yesButton";
             this.yesButton.Size = new System.Drawing.Size(75, 23);
             this.yesButton.TabIndex = 1;
             this.yesButton.Text = "Yes";
-            this.yesButton.UseVisualStyleBackColor = true;
+            this.yesButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.yesButton.UseVisualStyleBackColor = false;
             this.yesButton.Click += new System.EventHandler(this.yesButton_Click_1);
             // 
             // noButton
             // 
             this.noButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.noButton.Location = new System.Drawing.Point(165, 135);
+
             this.noButton.Name = "noButton";
             this.noButton.Size = new System.Drawing.Size(75, 23);
             this.noButton.TabIndex = 2;
             this.noButton.Text = "No";
-            this.noButton.UseVisualStyleBackColor = true;
+            this.noButton.UseVisualStyleBackColor = false;
             this.noButton.Click += new System.EventHandler(this.noButton_Click_1);
             // 
             // PauseScreen
@@ -70,7 +77,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Red;
             this.CancelButton = this.noButton;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(284, 126);
             this.Controls.Add(this.noButton);
             this.Controls.Add(this.yesButton);
             this.Controls.Add(this.titleLabel);

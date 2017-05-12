@@ -73,6 +73,12 @@ namespace BrickBreaker.Screens
 
                         //option button
                         case 2:
+                            OptionScreen os = new OptionScreen();
+
+                            form.Controls.Add(os);
+                            form.Controls.Remove(this);
+
+                            os.Location = new Point((form.Width - os.Width) / 2, (form.Height - os.Height) / 2);
                             break;
 
                         //exit button
