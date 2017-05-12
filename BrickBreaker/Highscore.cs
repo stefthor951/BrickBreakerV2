@@ -12,11 +12,12 @@ namespace BrickBreaker
 {
     public class Highscore
     {
-        public string name, score;
+        public string name, level, score;
 
-        public Highscore(string _name, string _score)
+        public Highscore(string _name, string _level, string _score)
         {
             name = _name;
+            level = _level;
             score = _score;
         }
 
@@ -65,7 +66,8 @@ namespace BrickBreaker
                 writer.WriteStartElement("highscore");
 
                 //Write sub-elements
-                writer.WriteElementString("name", hs.name); //This is the name aspect, not needed unless I reintroduce the name aspect of highscores
+                writer.WriteElementString("name", hs.name);
+                writer.WriteElementString("level", hs.level);
                 writer.WriteElementString("score", hs.score);
 
                 // end the "highscore" element

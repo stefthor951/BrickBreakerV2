@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.scoreTitle = new System.Windows.Forms.Label();
-            this.highscoreOutput = new System.Windows.Forms.Label();
-            this.recentScoreOutput = new System.Windows.Forms.Label();
+            this.top5Output = new System.Windows.Forms.Label();
+            this.next5Output = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // scoreTitle
@@ -44,25 +44,25 @@
             this.scoreTitle.TabIndex = 0;
             this.scoreTitle.Text = "High Scores";
             // 
-            // highscoreOutput
+            // top5Output
             // 
-            this.highscoreOutput.AutoSize = true;
-            this.highscoreOutput.Font = new System.Drawing.Font("Courier New", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.highscoreOutput.Location = new System.Drawing.Point(172, 200);
-            this.highscoreOutput.Name = "highscoreOutput";
-            this.highscoreOutput.Size = new System.Drawing.Size(150, 41);
-            this.highscoreOutput.TabIndex = 1;
-            this.highscoreOutput.Text = "label1";
+            this.top5Output.AutoSize = true;
+            this.top5Output.Font = new System.Drawing.Font("Courier New", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.top5Output.Location = new System.Drawing.Point(172, 200);
+            this.top5Output.Name = "top5Output";
+            this.top5Output.Size = new System.Drawing.Size(150, 41);
+            this.top5Output.TabIndex = 1;
+            this.top5Output.Text = "label1";
             // 
-            // recentScoreOutput
+            // next5Output
             // 
-            this.recentScoreOutput.AutoSize = true;
-            this.recentScoreOutput.Font = new System.Drawing.Font("Courier New", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.recentScoreOutput.Location = new System.Drawing.Point(487, 200);
-            this.recentScoreOutput.Name = "recentScoreOutput";
-            this.recentScoreOutput.Size = new System.Drawing.Size(150, 41);
-            this.recentScoreOutput.TabIndex = 2;
-            this.recentScoreOutput.Text = "label1";
+            this.next5Output.AutoSize = true;
+            this.next5Output.Font = new System.Drawing.Font("Courier New", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.next5Output.Location = new System.Drawing.Point(487, 200);
+            this.next5Output.Name = "next5Output";
+            this.next5Output.Size = new System.Drawing.Size(150, 41);
+            this.next5Output.TabIndex = 2;
+            this.next5Output.Text = "label1";
             // 
             // HighscoreScreen
             // 
@@ -70,8 +70,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BrickBreaker.Properties.Resources.fadedBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Controls.Add(this.recentScoreOutput);
-            this.Controls.Add(this.highscoreOutput);
+            this.Controls.Add(this.next5Output);
+            this.Controls.Add(this.top5Output);
             this.Controls.Add(this.scoreTitle);
             this.Name = "HighscoreScreen";
             this.Size = new System.Drawing.Size(800, 550);
@@ -84,7 +84,7 @@
         #endregion
 
         private System.Windows.Forms.Label scoreTitle;
-        private System.Windows.Forms.Label highscoreOutput;
-        private System.Windows.Forms.Label recentScoreOutput;
+        private System.Windows.Forms.Label top5Output;
+        private System.Windows.Forms.Label next5Output;
     }
 }

@@ -123,7 +123,7 @@ namespace BrickBreaker
 
                     if (spaceDown == true)
                     {
-                        Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(Form1.currentScore));
+                        Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(Form1.currentLevel), Convert.ToString(Form1.currentScore));
                         hs.save(hs);
                         hs.saveScores(Form1.highscoreList);
 
@@ -143,7 +143,7 @@ namespace BrickBreaker
 
                     if (spaceDown == true)
                     {
-                        Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(Form1.currentScore));
+                        Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(Form1.currentLevel), Convert.ToString(Form1.currentScore));
                         hs.save(hs);
                         hs.saveScores(Form1.highscoreList);
 

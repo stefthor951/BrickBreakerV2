@@ -130,6 +130,7 @@ namespace BrickBreaker.Screens
 
             //also added by Lake
             loadLevel("level1.xml");
+            currentLevel = 1;
             /*
             // Creates blocks for generic level
             blocks.Clear();
@@ -390,46 +391,58 @@ namespace BrickBreaker.Screens
                         if (blocks.Count == 0)
                         {
                             //added by Lake
-                            #region Decide Wich Level To Load
+                            #region Decide Which Level To Load
                             currentLevel++;
 
                             switch (currentLevel)
                             {
                                 case 2:
                                     levelToLoad = "level2.xml";
+                                    currentLevel = 2;
                                     break;
                                 case 3:
                                     levelToLoad = "level3.xml";
+                                    currentLevel = 3;
                                     break;
                                 case 4:
                                     levelToLoad = "level4.xml";
+                                    currentLevel = 4;
                                     break;
                                 case 5:
                                     levelToLoad = "level5.xml";
+                                    currentLevel = 5;
                                     break;
                                 case 6:
                                     levelToLoad = "level6.xml";
+                                    currentLevel = 6;
                                     break;
                                 case 7:
                                     levelToLoad = "level7.xml";
+                                    currentLevel = 7;
                                     break;
                                 case 8:
                                     levelToLoad = "level8.xml";
+                                    currentLevel = 8;
                                     break;
                                 case 9:
                                     levelToLoad = "level9.xml";
+                                    currentLevel = 9;
                                     break;
                                 case 10:
                                     levelToLoad = "level10.xml";
+                                    currentLevel = 10;
                                     break;
                                 case 11:
                                     levelToLoad = "level11.xml";
+                                    currentLevel = 11;
                                     break;
                                 case 12:
                                     levelToLoad = "level12.xml";
+                                    currentLevel = 12;
                                     break;
                                 case 13:
                                     levelToLoad = "level13.xml";
+                                    currentLevel = 13;
                                     break;
                                 case 14:
                                     OnEnd();
