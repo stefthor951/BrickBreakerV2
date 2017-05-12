@@ -38,6 +38,7 @@ namespace BrickBreaker.Screens
         int floorTimer = 0;
         int strongBallTimer = 0;
         int shroomsTimer = 0;
+        int shroomsControlTimer = 0;
         int blindfoldTimer = 0;
         double pointsMultiplier = 1;
         bool longPaddle = false;
@@ -45,6 +46,7 @@ namespace BrickBreaker.Screens
         bool isFloor = false;
         bool isStrongball = false;
         bool isShrooms = false;
+        bool isShroomsControls = false;
         bool isBlindfold = false;
 
         Paddle floorPaddle;
@@ -242,7 +244,7 @@ namespace BrickBreaker.Screens
         {
             // Move the paddle
             //swaps controls when shrooms is active
-            if (isShrooms)
+            if (isShroomsControls)
             {
                 if (leftArrowDown && paddle.x < (this.Width - paddle.width))
                 {
@@ -329,11 +331,17 @@ namespace BrickBreaker.Screens
                 ballBrush.Color = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
                 paddleBrush.Color = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
 
+                if (shroomsControlTimer >= 80 && isShroomsControls == false)
+                {
+                    isShroomsControls = true;
+                }
+
+                shroomsControlTimer++;
                 shroomsTimer--;
             }
             else if (shroomsTimer <= 0 && isShrooms == true)
             {
-                isShrooms = false;
+                isShrooms = isShroomsControls = false;
                 paddleBrush.Color = ballBrush.Color = Color.White;
 
             }
@@ -660,8 +668,8 @@ namespace BrickBreaker.Screens
 
         public void ResetPowerups()
         {
-            longPaddle = isFloor = isMagnet = isStrongball = isShrooms = isBlindfold = false;
-            MagnetTimer = floorTimer = strongBallTimer = shroomsTimer = blindfoldTimer = 0;
+            longPaddle = isFloor = isMagnet = isStrongball = isShrooms = isShroomsControls = isBlindfold = false;
+            MagnetTimer = floorTimer = strongBallTimer = shroomsTimer = shroomsControlTimer = blindfoldTimer = 0;
             pointsMultiplier = 1;
 
             paddle.width = 80;
