@@ -220,7 +220,7 @@ namespace BrickBreaker.Screens
         {
             gameTimer.Enabled = false;
 
-            DialogResult result = PauseScreen.Show("Quit the Game?", "Testing", "Yes", "No");
+            DialogResult result = PauseScreen.Show("Return to the Main Menu?", "Yes", "No");
 
             switch (result)
             {
@@ -232,7 +232,13 @@ namespace BrickBreaker.Screens
                     break;
 
                 case DialogResult.Yes:
-                    Application.Exit();
+                    MenuScreen ms = new MenuScreen();
+                    Form form = this.FindForm();
+
+                    form.Controls.Add(ms);
+                    form.Controls.Remove(this);
+
+                    ms.Location = new Point((form.Width - ms.Width) / 2, (form.Height - ms.Height) / 2);
                     break;
             }
         }

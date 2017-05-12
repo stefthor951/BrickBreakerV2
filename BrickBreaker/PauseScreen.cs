@@ -20,7 +20,7 @@ namespace BrickBreaker.Screens
         static PauseScreen pause;
         static public DialogResult result;
 
-        public static DialogResult Show(string Text, string Caption, string btnYes, string btnNo)
+        public static DialogResult Show(string Text, string btnYes, string btnNo)
         {
             pause = new PauseScreen();
             pause.titleLabel.Text = Text;

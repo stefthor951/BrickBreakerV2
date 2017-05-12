@@ -36,7 +36,7 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Location = new System.Drawing.Point(124, 62);
+            this.titleLabel.Location = new System.Drawing.Point(84, 87);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(27, 13);
             this.titleLabel.TabIndex = 0;
@@ -54,6 +54,7 @@
             // 
             // noButton
             // 
+            this.noButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.noButton.Location = new System.Drawing.Point(165, 135);
             this.noButton.Name = "noButton";
             this.noButton.Size = new System.Drawing.Size(75, 23);
