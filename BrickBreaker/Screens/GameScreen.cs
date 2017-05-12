@@ -15,6 +15,9 @@ using System.Media;
 using BrickBreaker;
 using BrickBreaker.Screens;
 using System.Xml;
+using System.IO;
+using System.Threading;
+
 
 namespace BrickBreaker.Screens
 {
@@ -22,24 +25,31 @@ namespace BrickBreaker.Screens
     {
         #region global values
 
-
-
         #region Stefan and Jack's values
-        // Creates powerup list
-        List<PowerUp> powerUps = new List<PowerUp>();
-        List<PowerUp> activePowerUps = new List<PowerUp>();
 
-        int longPaddleCounter = 0;
+        List<PowerUp> powerUps = new List<PowerUp>();
+
+        Random randomNum = new Random();
+
+        int longPaddleTimer = 0;
+        int MagnetTimer = 0;
+        int floorTimer = 0;
+        int strongBallTimer = 0;
+        int shroomsTimer = 0;
+        int blindfoldTimer = 0;
+        double pointsMultiplier = 1;
         bool longPaddle = false;
         bool isMagnet = false;
-        int isMagnetTimer = 0;
-        bool floor = false;
-        int floorTimer = 0;
+        bool isFloor = false;
+        bool isStrongball = false;
+        bool isShrooms = false;
+        bool isBlindfold = false;
 
         Paddle floorPaddle;
 
         SolidBrush powerupBrush = new SolidBrush(Color.Green);
         SolidBrush floorBrush = new SolidBrush(Color.Cyan);
+
         #endregion
 
         //player1 button control keys - DO NOT CHANGE
@@ -48,7 +58,7 @@ namespace BrickBreaker.Screens
         // Game values
         public static int lives, paddleSpeed, xSpeed, ySpeed, ticksSinceHit;
 
-        int currentLevel = 1;
+        int currentLevel = 1, totalLevels;
 
         string levelToLoad;
 
@@ -60,14 +70,15 @@ namespace BrickBreaker.Screens
         // list of all blocks
         List<Block> blocks = new List<Block>();
 
+        //list of all balls
+        List<Ball> balls = new List<Ball>();
+
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
         SolidBrush ballBrush = new SolidBrush(Color.White);
         SolidBrush blockBrush = new SolidBrush(Color.Red);
 
-
-        //list of all balls
-        List<Ball> balls = new List<Ball>();
+        Pen ballPen = new Pen(Color.Black);
 
 
 
@@ -115,30 +126,18 @@ namespace BrickBreaker.Screens
 
             // setup starting ball values
             int ballX = ((this.Width / 2) - 10);
-            int ballY = (this.Height - paddle.height) - 80;
+            int ballY = (this.Height - paddle.height) - 120;
 
             // Creates a new ball
             int xSpeed = Form1.xSpeed;
-            int ySpeed = Form1.ySpeed;
+            int ySpeed = -Form1.ySpeed;
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
             balls.Add(ball);
 
             //also added by Lake
-            loadLevel("level1.xml");
-            /*
-            // Creates blocks for generic level
-            blocks.Clear();
-            int x = 10;
+            loadLevel("levels\\level1.xml");
 
-            while (blocks.Count < 12)
-            {
-                x += 57;
-                Block b1 = new Block(x, 10, 1, Color.White);
-                blocks.Add(b1);
-            }
-            */
-            // start the game engine loop
             gameTimer.Enabled = true;
         }
 
@@ -241,9 +240,25 @@ namespace BrickBreaker.Screens
                     break;
             }
         }
+
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             // Move the paddle
+            //swaps controls when shrooms is active
+            if (isShrooms)
+            {
+                if (leftArrowDown && paddle.x < (this.Width - paddle.width))
+                {
+                    paddle.Move("right");
+                }
+                if (rightArrowDown && paddle.x > 0)
+                {
+                    paddle.Move("left");
+                }
+            }
+            //normal controls when shrooms is off
+            else
+            {
             if (leftArrowDown && paddle.x > 0)
             {
                 paddle.Move("left");
@@ -252,46 +267,89 @@ namespace BrickBreaker.Screens
             {
                 paddle.Move("right");
             }
+            }
 
             #region Stefan and Jacks PowerUps
-
-            if (isMagnetTimer > 0 && isMagnet == true)
+            if (MagnetTimer > 0 && isMagnet == true)
             {
-                isMagnetTimer--;
+                MagnetTimer--;
             }
-            else if (isMagnetTimer <= 0 && isMagnet == true)
+            else if (MagnetTimer <= 0 && isMagnet == true)
             {
                 isMagnet = false;
             }
 
             if (longPaddle == true)
             {
-                longPaddleCounter++;
-                if (longPaddleCounter >= 14 && paddle.width > 80)
+                longPaddleTimer++;
+                if (longPaddleTimer >= 14 && paddle.width > 80)
                 {
-                    longPaddleCounter = 0;
+                    longPaddleTimer = 0;
                     paddle.x++;
                     paddle.width -= 2;
                 }
-                else if (paddle.width <= 80 && longPaddleCounter >= 14)
+                else if (paddle.width <= 80 && longPaddleTimer >= 14)
                 {
-                    longPaddleCounter = 0;
+                    longPaddleTimer = 0;
                     longPaddle = false;
                 }
             }
-
-            if (floor == true && floorTimer <= 0)
+            else if (longPaddle == true && paddle.width != 80)
             {
-                floor = false;
+                paddle.width = 80;
             }
-            else if (floor == true && floorTimer > 0)
+
+            if (isFloor == true && floorTimer <= 0)
+            {
+                isFloor = false;
+            }
+            else if (isFloor == true && floorTimer > 0)
             {
                 floorTimer--;
-                if (ball.PaddleCollision(floorPaddle, false, false, 100) == 0)
+                foreach (Ball ba in balls)
+                {
+                    if (ba.PaddleCollision(floorPaddle, false, false, 100) == 0)
                 {
                     floorTimer = 0;
                 }
+                }
+                CollidePowerUps(floorPaddle);
             }
+
+            if (strongBallTimer > 0 && isStrongball == true)
+            {
+                strongBallTimer--;
+            }
+            else if (strongBallTimer <= 0 && isStrongball == true)
+            {
+                isStrongball = false;
+
+                ballBrush.Color = Color.White;
+            }
+
+            if (shroomsTimer > 0 && isShrooms == true)
+            {
+                ballBrush.Color = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
+                paddleBrush.Color = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
+
+                shroomsTimer--;
+            }
+            else if (shroomsTimer <= 0 && isShrooms == true)
+            {
+                isShrooms = false;
+                paddleBrush.Color = ballBrush.Color = Color.White;
+
+            }
+
+            if (blindfoldTimer > 0 && isBlindfold == true)
+            {
+                blindfoldTimer--;
+            }
+            else if (blindfoldTimer <= 0 && isBlindfold == true)
+            {
+                isBlindfold = false;
+            }
+
 
             // Moves powerups
             MovePowerups(powerUps);
@@ -301,24 +359,19 @@ namespace BrickBreaker.Screens
             #endregion
 
             // Moves balls
-            foreach (Ball b in balls)
+            foreach (Ball ball in balls)
             {
                 ball.Move();
             }
-            // Moves powerups
-            MovePowerups(powerUps);
 
-            // Check for collision with powerups and paddle
-            CollidePowerUps(paddle);
-
-            // Check for collision with top and side walls
-            ball.WallCollision(this);
-
-            // Check for collision of ball with paddle, (incl. paddle movement)
-            ticksSinceHit = ball.PaddleCollision(paddle, leftArrowDown, rightArrowDown, ticksSinceHit);
 
             foreach (Ball ba in balls)
             {
+                // Check for collision with top and side walls
+                ba.WallCollision(this);
+
+                // Check for collision of ball with paddle, (incl. paddle movement)
+                ticksSinceHit = ba.PaddleCollision(paddle, leftArrowDown, rightArrowDown, ticksSinceHit);
 
                 // Check if each ball has collided with any blocks
                 foreach (Block b in blocks)
@@ -327,62 +380,39 @@ namespace BrickBreaker.Screens
 
                     {
                         //decreases struck block hp and removes blocks with hp 0
-                        b.hp--;
-                        if (b.hp == 0)
+                        if (isStrongball == true)
+                        {
+                            b.hp -= 2;
+                        }
+                        else
+                        {
+                            b.hp--;
+                        }
+
+                        if (b.hp <= 0)
+                        {
                             blocks.Remove(b);
+                            GeneratePowerUp(b.x, b.y);
+                        }
 
-                        Form1.currentScore += 100;
-
-                        GeneratePowerUp(b.x, b.y);
+                        Form1.currentScore += Convert.ToInt32(100 * pointsMultiplier);
 
                         if (blocks.Count == 0)
                         {
                             //added by Lake
                             #region Decide Wich Level To Load
+                            totalLevels = Directory.GetFiles("levels", "*.xml", SearchOption.AllDirectories).Length;
                             currentLevel++;
-
-                            switch (currentLevel)
+                            if (currentLevel <= totalLevels)
                             {
-                                case 2:
-                                    levelToLoad = "level2.xml";
-                                    break;
-                                case 3:
-                                    levelToLoad = "level3.xml";
-                                    break;
-                                case 4:
-                                    levelToLoad = "level4.xml";
-                                    break;
-                                case 5:
-                                    levelToLoad = "level5.xml";
-                                    break;
-                                case 6:
-                                    levelToLoad = "level6.xml";
-                                    break;
-                                case 7:
-                                    levelToLoad = "level7.xml";
-                                    break;
-                                case 8:
-                                    levelToLoad = "level8.xml";
-                                    break;
-                                case 9:
-                                    levelToLoad = "level9.xml";
-                                    break;
-                                case 10:
-                                    levelToLoad = "level10.xml";
-                                    break;
-                                case 11:
-                                    levelToLoad = "level11.xml";
-                                    break;
-                                case 12:
-                                    levelToLoad = "level12.xml";
-                                    break;
-                                case 13:
-                                    levelToLoad = "level13.xml";
-                                    break;
-                                case 14:
-                                    OnEnd();
-                                    break;
+                                levelToLoad = "levels\\level" + currentLevel + ".xml";
                             }
+                            else
+                            {
+                                OnEnd();
+                            }
+
+                            Thread.Sleep(1000);
 
                             loadLevel(levelToLoad);
                             ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
@@ -391,6 +421,9 @@ namespace BrickBreaker.Screens
                             paddle.y = (this.Height - 20) - 60;
                             lives = 3;
                             #endregion
+
+                            //Resetting powerups
+                            ResetPowerups();
                         }
 
                         break;
@@ -404,6 +437,9 @@ namespace BrickBreaker.Screens
                     else
                     {
                         lives--;
+
+                        //You suck! Lose all powerups!
+                        ResetPowerups();
 
                         // Moves the ball back to origin
                         ba.x = ((paddle.x - (ba.size / 2)) + (paddle.width / 2));
@@ -424,8 +460,9 @@ namespace BrickBreaker.Screens
 
                     break;
                 }
-            }
 
+            }
+            
             //redraw the screen
             Refresh();
         }
@@ -489,6 +526,8 @@ namespace BrickBreaker.Screens
 
         public void OnEnd()
         {
+            Thread.Sleep(1000);
+
             // Goes to the game over screen
             Form form = this.FindForm();
             LoseScreen ls = new LoseScreen();
@@ -501,49 +540,55 @@ namespace BrickBreaker.Screens
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-
-
-            Image backImage = BrickBreaker.Properties.Resources.texture4;
-            
+            Image backImage = BrickBreaker.Properties.Resources.texture4;           
             Rectangle backRect = new Rectangle((0 - 400) - paddle.x, 0, this.Width * 3, this.Height);
             e.Graphics.DrawImage(backImage, backRect);
             
 
             // Draws paddle
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+            e.Graphics.DrawRectangle(ballPen, paddle.x, paddle.y, paddle.width, paddle.height);
 
-            // Draws blocks
-            foreach (Block b in blocks)
+            // Draws blocks (pnly if blindfold is not on)
+            if (isBlindfold == false)
             {
-                blockBrush.Color = b.colour;
-                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+                foreach (Block b in blocks)
+                {
+                    blockBrush.Color = b.colour;
+                    if (isShrooms)
+                    {
+                        blockBrush.Color = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
+                    }
+                    e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+                    e.Graphics.DrawRectangle(ballPen, b.x, b.y, b.width, b.height);
+                }
             }
-
             #region Stefan and Jacks Powerups
             // Draws Powerups
             DrawPowerups(e);
 
-            if (floor == true)
+            if (isFloor == true)
             {
                 e.Graphics.FillRectangle(floorBrush, floorPaddle.x, floorPaddle.y, floorPaddle.width, floorPaddle.height);
             }
             #endregion
 
-            DrawPowerups(e);
-
-            // Draws balls
-            e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
-
+            //drawBalls
+            foreach (Ball ba1 in balls)
+            {
+                e.Graphics.FillRectangle(ballBrush, ba1.x, ba1.y, ba1.size, ba1.size);
+                e.Graphics.DrawRectangle(ballPen, ba1.x, ba1.y, ba1.size, ba1.size);
+                
+            }
         }
 
         #region Stefan and Jack's Powerup Methods
+
         public void GeneratePowerUp(int brickX, int brickY)
         {
-            Random n = new Random();
-
-            if (n.Next(0, 1) == 0)
+            if (randomNum.Next(0, 1) == 0)
             {
-                PowerUp p = new PowerUp(brickX, brickY, 20, 3, n.Next(0, 7));
+                PowerUp p = new PowerUp(brickX, brickY, 20, 3, randomNum.Next(0, 9));
                 powerUps.Add(p);
             }
         }
@@ -564,19 +609,72 @@ namespace BrickBreaker.Screens
             }
         }
 
-        public void CollidePowerUps(Paddle paddle)
+        public void CollidePowerUps(Paddle tempPaddle)
         {
             foreach (PowerUp p in powerUps)
             {
-                if (p.Collision(paddle) == true)
+                if (p.Collision(tempPaddle) == true)
                 {
+                    switch (p.type)
+                    {
+                        case 0:
+                            isMagnet = true;
+                            MagnetTimer = 900;
+                            break;
+                        case 1:
+                            paddle.width += 80;
+                            paddle.x -= 40;
+                            longPaddle = true;
+                            break;
+                        case 2:
+                            Ball tempBall = new Ball(paddle.x + paddle.width / 2, paddle.y, Form1.xSpeed, -Form1.ySpeed, 20);
+                            balls.Add(tempBall);
+                            break;
+                        case 3:
+                            isFloor = true;
+                            floorTimer = 800;
+                            break;
+                        case 4:
+                            lives++;
+                            break;
+                        case 5:
+                            pointsMultiplier += 0.1;
+                            break;
+                        case 6:
+                            strongBallTimer = 400;
+                            isStrongball = true;
+                            ballBrush.Color = Color.Orange;
+                            break;
+                        case 7:
+                            shroomsTimer = 600;
+                            isShrooms = true;
+                            break;
+                        case 8:
+                            blindfoldTimer = 400;
+                            isBlindfold = true;
+                            break;
+                    }
+
                     powerUps.Remove(p);
-                    activePowerUps.Add(p);
                     break;
                 }
             }
         }
-        
+
+        public void ResetPowerups()
+        {
+            longPaddle = isFloor = isMagnet = isStrongball = isShrooms = isBlindfold = false;
+            MagnetTimer = floorTimer = strongBallTimer = shroomsTimer = blindfoldTimer = 0;
+            pointsMultiplier = 1;
+
+            paddle.width = 80;
+
+            paddleBrush.Color = Color.White;
+            ballBrush.Color = Color.White;
+
+            powerUps.Clear();
+        }
+        //change
         #endregion
     }
 }
