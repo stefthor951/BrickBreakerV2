@@ -39,8 +39,10 @@
             // 
             // easyButton
             // 
-            this.easyButton.BackColor = System.Drawing.SystemColors.Control;
-            this.easyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.easyButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.easyButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.easyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.easyButton.Font = new System.Drawing.Font("Corbel", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.easyButton.Location = new System.Drawing.Point(113, 65);
             this.easyButton.Name = "easyButton";
             this.easyButton.Size = new System.Drawing.Size(230, 67);
@@ -52,7 +54,7 @@
             // mediumButton
             // 
             this.mediumButton.BackColor = System.Drawing.SystemColors.Control;
-            this.mediumButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mediumButton.Font = new System.Drawing.Font("Corbel", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mediumButton.Location = new System.Drawing.Point(113, 159);
             this.mediumButton.Name = "mediumButton";
             this.mediumButton.Size = new System.Drawing.Size(230, 67);
@@ -64,7 +66,7 @@
             // hardButton
             // 
             this.hardButton.BackColor = System.Drawing.SystemColors.Control;
-            this.hardButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hardButton.Font = new System.Drawing.Font("Corbel", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hardButton.Location = new System.Drawing.Point(113, 254);
             this.hardButton.Name = "hardButton";
             this.hardButton.Size = new System.Drawing.Size(230, 67);
@@ -75,7 +77,7 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Corbel", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Red;
             this.button1.Location = new System.Drawing.Point(477, 460);
             this.button1.Name = "button1";
@@ -83,7 +85,6 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Menu";
             this.button1.UseVisualStyleBackColor = true;
-            //this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // difficultyLabel
             // 
@@ -98,7 +99,7 @@
             // 
             // acceptButton
             // 
-            this.acceptButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.acceptButton.Font = new System.Drawing.Font("Corbel", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.acceptButton.Location = new System.Drawing.Point(113, 460);
             this.acceptButton.Name = "acceptButton";
             this.acceptButton.Size = new System.Drawing.Size(230, 67);
@@ -109,7 +110,7 @@
             // 
             // impossibleButton
             // 
-            this.impossibleButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.impossibleButton.Font = new System.Drawing.Font("Corbel", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.impossibleButton.Location = new System.Drawing.Point(113, 358);
             this.impossibleButton.Name = "impossibleButton";
             this.impossibleButton.Size = new System.Drawing.Size(230, 67);
@@ -118,11 +119,11 @@
             this.impossibleButton.UseVisualStyleBackColor = true;
             this.impossibleButton.Click += new System.EventHandler(this.impossibleButton_Click);
             // 
-            // menuButton
+            // OptionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::BrickBreaker.Properties.Resources.Brick_Breaker;
+            this.BackgroundImage = global::BrickBreaker.Properties.Resources.mainScreenBack;
             this.Controls.Add(this.impossibleButton);
             this.Controls.Add(this.acceptButton);
             this.Controls.Add(this.difficultyLabel);
@@ -130,7 +131,7 @@
             this.Controls.Add(this.hardButton);
             this.Controls.Add(this.mediumButton);
             this.Controls.Add(this.easyButton);
-            this.Name = "menuButton";
+            this.Name = "OptionScreen";
             this.Size = new System.Drawing.Size(785, 542);
             this.ResumeLayout(false);
             this.PerformLayout();

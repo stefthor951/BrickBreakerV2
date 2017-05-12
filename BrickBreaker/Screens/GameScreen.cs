@@ -92,6 +92,11 @@ namespace BrickBreaker.Screens
 
         public void OnStart()
         {
+            //lives Images
+            Form1.heartImage1.BackgroundImage = Properties.Resources.life;
+            Form1.heartImage2.BackgroundImage = Properties.Resources.life;
+            Form1.heartImage3.BackgroundImage = Properties.Resources.life;
+
             //Resets score
             Form1.currentScore = 0;
 
@@ -441,10 +446,13 @@ namespace BrickBreaker.Screens
                         ba.y = (this.Height - paddle.height) - 85;
                     }
 
-
+                    //lives Images
+                    if (lives == 2) { Form1.heartImage3.BackgroundImage = Properties.Resources.lostLife; }
+                    if (lives == 1) { Form1.heartImage2.BackgroundImage = Properties.Resources.lostLife; }
 
                     if (lives == 0)
                     {
+                        Form1.heartImage1.BackgroundImage = Properties.Resources.lostLife;
                         gameTimer.Enabled = false;
 
                         OnEnd();
@@ -532,10 +540,10 @@ namespace BrickBreaker.Screens
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-            Image backImage = BrickBreaker.Properties.Resources.fadedBackground;
-            
+            Image backImage = BrickBreaker.Properties.Resources.texture4;           
             Rectangle backRect = new Rectangle((0 - 400) - paddle.x, 0, this.Width * 3, this.Height);
             e.Graphics.DrawImage(backImage, backRect);
+            
 
             // Draws paddle
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);

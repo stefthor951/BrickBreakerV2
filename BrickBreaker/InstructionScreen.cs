@@ -95,7 +95,7 @@ namespace BrickBreaker.Screens
                     break;
             }
 
-            //sets labels color to red if selected
+            //sets labels color to red if selected    
             switch(index)
             {
                 case 0:
