@@ -247,6 +247,45 @@
   <ItemGroup>
     <None Include="Resources\Brick-Breaker.jpeg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\joyStick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\life.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lostLife.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mainScreenBack.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\joyStick01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buttonBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackk.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

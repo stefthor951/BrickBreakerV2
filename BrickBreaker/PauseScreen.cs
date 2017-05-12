@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//comment
+
 namespace BrickBreaker.Screens
 {
     public partial class PauseScreen : Form
@@ -20,7 +22,7 @@ namespace BrickBreaker.Screens
         static PauseScreen pause;
         static public DialogResult result;
 
-        public static DialogResult Show(string Text, string Caption, string btnYes, string btnNo)
+        public static DialogResult Show(string Text, string btnYes, string btnNo)
         {
             pause = new PauseScreen();
             pause.titleLabel.Text = Text;

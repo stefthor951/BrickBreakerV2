@@ -99,26 +99,7 @@ namespace BrickBreaker
                 double diff = speed / Math.Sqrt(xSpeed * xSpeed + ySpeed * ySpeed);
                 xSpeed *= diff;
                 ySpeed *= diff;
-                 /*
-                if (x < p.x && (y + size) > p.y)
-                { 
-                    xSpeed = -Math.Abs(xSpeed);
-                    ySpeed = -Math.Abs(ySpeed);
-                }
-                else if (x + size > (p.x + p.width) && (y + size) > p.y)
-                {
-                    xSpeed = Math.Abs(xSpeed);
-                    ySpeed = -Math.Abs(ySpeed);
-                }
-                else
-                {
-                    ySpeed = -Math.Abs(ySpeed);
-
-                }
-                */
-                /*
                 
-                */
                 //returns 0 if collision occurs, resetting the number of ticks since the last collision
                 return 0;             
             }
