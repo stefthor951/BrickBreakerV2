@@ -163,7 +163,13 @@ namespace BrickBreaker
 
                     if (spaceDown == true)
                     {
-                        // Goes to the main menu screen
+
+                        Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(Form1.currentLevel), Convert.ToString(Form1.currentScore));
+                        hs.save(hs);
+                        hs.saveScores(Form1.highscoreList);
+
+                        // Goes to the game screen
+
                         Form form = this.FindForm();
                         Screens.MenuScreen ms = new Screens.MenuScreen();
 
@@ -179,7 +185,12 @@ namespace BrickBreaker
 
                     if (spaceDown == true)
                     {
-                        // Goes to the game screen
+                        Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(Form1.currentLevel), Convert.ToString(Form1.currentScore));
+                        hs.save(hs);
+                        hs.saveScores(Form1.highscoreList);
+
+                        // Goes to the main menu screen
+
                         Form form = this.FindForm();
                         Screens.GameScreen gs = new Screens.GameScreen();
 

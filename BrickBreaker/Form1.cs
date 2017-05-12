@@ -47,9 +47,8 @@ namespace BrickBreaker
         //public static SoundPlayer player = new SoundPlayer(Properties.)
 
         public static List<Highscore> highscoreList = new List<Highscore>();
-        public static int currentScore, paddleSpeed, lives, xSpeed, ySpeed;
-
-     
+        public static int currentScore, currentLevel, paddleSpeed, lives, xSpeed, ySpeed;
+       
 
         // add a new comment
 
@@ -103,17 +102,20 @@ namespace BrickBreaker
             parent = doc.DocumentElement;
             foreach (XmlNode child in parent.ChildNodes)
             {
-                Highscore hs = new Highscore(null, null);
+                Highscore hs = new Highscore(null, null, null);
                 foreach (XmlNode grandChild in child.ChildNodes)
                 {
                     if (grandChild.Name == "name")
                     {
                         hs.name = grandChild.InnerText;
                     }
+                    if (grandChild.Name == "level")
+                    {
+                        hs.level = grandChild.InnerText;
+                    }
                     if (grandChild.Name == "score")
                     {
                         hs.score = grandChild.InnerText;
-                        //scores.Add(Convert.ToInt16(child.InnerText));
                     }
                 }
                 highscoreList.Add(hs);

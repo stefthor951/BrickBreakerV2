@@ -138,6 +138,7 @@ namespace BrickBreaker.Screens
             balls.Add(ball);
 
             //also added by Lake
+
             loadLevel("levels\\level1.xml");
 
             gameTimer.Enabled = true;
@@ -414,6 +415,7 @@ namespace BrickBreaker.Screens
                         if (blocks.Count == 0)
                         {
                             //added by Lake
+
                             #region Decide Wich Level To Load
                             totalLevels = Directory.GetFiles("levels", "*.xml", SearchOption.AllDirectories).Length;
                             currentLevel++;
@@ -424,7 +426,7 @@ namespace BrickBreaker.Screens
                             else
                             {
                                 OnEnd();
-                            }
+                             }
 
                             Thread.Sleep(1000);
 
