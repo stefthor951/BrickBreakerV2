@@ -48,9 +48,11 @@ namespace BrickBreaker
 
         public static List<Highscore> highscoreList = new List<Highscore>();
         public static int currentScore, paddleSpeed, lives, xSpeed, ySpeed;
-       
+
+     
+
         // add a new comment
-        
+
         //test comment
 
         public Form1()
@@ -59,10 +61,31 @@ namespace BrickBreaker
             lives = 3;
             paddleSpeed = 10;
             xSpeed = ySpeed = 6;
+            this.DoubleBuffered = true;
     }
 
+        public static PictureBox heartImage1 = new PictureBox();
+        public static PictureBox heartImage2 = new PictureBox();
+        public static PictureBox heartImage3 = new PictureBox();
+
+        private void pictureBoxes(PictureBox x)
+        {
+            Controls.Add(x);
+            x.Size = new Size(50, 45);
+            x.BackColor = Color.White;
+            x.BackgroundImageLayout = ImageLayout.Stretch;
+
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
+            pictureBoxes(heartImage1);
+            pictureBoxes(heartImage2);
+            pictureBoxes(heartImage3);
+            heartImage1.Location = new Point(300, 55);
+            heartImage2.Location = new Point(360, 55);
+            heartImage3.Location = new Point(420, 55);
+          
+
             // Start the program centred on the Menu Screen
             MenuScreen ps = new MenuScreen();
             this.Controls.Add(ps);
@@ -95,6 +118,12 @@ namespace BrickBreaker
                 }
                 highscoreList.Add(hs);
             }
+        }
+
+        SolidBrush boxBrush = new SolidBrush(Color.White);
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+           e.Graphics.FillRectangle(boxBrush, (this.Width - 925) / 2, (this.Height - 675) /2, 925,675);
         }
     }
 }
