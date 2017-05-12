@@ -76,7 +76,7 @@ namespace BrickBreaker.Screens
         public GameScreen()
         {
             InitializeComponent();
-            OnStart();
+            OnStart();  
         }
 
         public void OnStart()
