@@ -486,7 +486,7 @@ namespace BrickBreaker.Screens
             }
             reader.Close();
         }
-
+        
         public void OnEnd()
         {
             // Goes to the game over screen
