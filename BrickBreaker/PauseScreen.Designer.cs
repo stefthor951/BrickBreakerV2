@@ -36,9 +36,8 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Corbel", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.ForeColor = System.Drawing.Color.White;
-            this.titleLabel.Location = new System.Drawing.Point(33, 23);
+
+            this.titleLabel.Location = new System.Drawing.Point(84, 87);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(220, 33);
             this.titleLabel.TabIndex = 0;
@@ -61,13 +60,9 @@
             // 
             // noButton
             // 
-            this.noButton.BackColor = System.Drawing.Color.Transparent;
-            this.noButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.noButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.noButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noButton.Font = new System.Drawing.Font("Kozuka Gothic Pro R", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noButton.ForeColor = System.Drawing.Color.White;
-            this.noButton.Location = new System.Drawing.Point(162, 77);
+            this.noButton.Location = new System.Drawing.Point(165, 135);
+
             this.noButton.Name = "noButton";
             this.noButton.Size = new System.Drawing.Size(75, 23);
             this.noButton.TabIndex = 2;
