@@ -26,13 +26,13 @@ namespace BrickBreaker.Screens
         #region global values
 
         #region Stefan and Jack's values
-        // Creates powerup list
+
         List<PowerUp> powerUps = new List<PowerUp>();
 
         Random randomNum = new Random();
 
-        int longPaddleCounter = 0;
-        int isMagnetTimer = 0;
+        int longPaddleTimer = 0;
+        int MagnetTimer = 0;
         int floorTimer = 0;
         int strongBallTimer = 0;
         int shroomsTimer = 0;
@@ -40,8 +40,8 @@ namespace BrickBreaker.Screens
         double pointsMultiplier = 1;
         bool longPaddle = false;
         bool isMagnet = false;
-        bool floor = false;
-        bool strongBall = false;
+        bool isFloor = false;
+        bool isStrongball = false;
         bool isShrooms = false;
         bool isBlindfold = false;
 
@@ -49,6 +49,7 @@ namespace BrickBreaker.Screens
 
         SolidBrush powerupBrush = new SolidBrush(Color.Green);
         SolidBrush floorBrush = new SolidBrush(Color.Cyan);
+
         #endregion
 
         //player1 button control keys - DO NOT CHANGE
@@ -238,6 +239,21 @@ namespace BrickBreaker.Screens
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             // Move the paddle
+            //swaps controls when shrooms is active
+            if (isShrooms)
+            {
+                if (leftArrowDown && paddle.x < (this.Width - paddle.width))
+                {
+                    paddle.Move("right");
+                }
+                if (rightArrowDown && paddle.x > 0)
+                {
+                    paddle.Move("left");
+                }
+            }
+            //normal controls when shrooms is off
+            else
+            {
             if (leftArrowDown && paddle.x > 0)
             {
                 paddle.Move("left");
@@ -246,29 +262,30 @@ namespace BrickBreaker.Screens
             {
                 paddle.Move("right");
             }
+            }
 
             #region Stefan and Jacks PowerUps
-            if (isMagnetTimer > 0 && isMagnet == true)
+            if (MagnetTimer > 0 && isMagnet == true)
             {
-                isMagnetTimer--;
+                MagnetTimer--;
             }
-            else if (isMagnetTimer <= 0 && isMagnet == true)
+            else if (MagnetTimer <= 0 && isMagnet == true)
             {
                 isMagnet = false;
             }
 
             if (longPaddle == true)
             {
-                longPaddleCounter++;
-                if (longPaddleCounter >= 14 && paddle.width > 80)
+                longPaddleTimer++;
+                if (longPaddleTimer >= 14 && paddle.width > 80)
                 {
-                    longPaddleCounter = 0;
+                    longPaddleTimer = 0;
                     paddle.x++;
                     paddle.width -= 2;
                 }
-                else if (paddle.width <= 80 && longPaddleCounter >= 14)
+                else if (paddle.width <= 80 && longPaddleTimer >= 14)
                 {
-                    longPaddleCounter = 0;
+                    longPaddleTimer = 0;
                     longPaddle = false;
                 }
             }
@@ -277,27 +294,30 @@ namespace BrickBreaker.Screens
                 paddle.width = 80;
             }
 
-            if (floor == true && floorTimer <= 0)
+            if (isFloor == true && floorTimer <= 0)
             {
-                floor = false;
+                isFloor = false;
             }
-            else if (floor == true && floorTimer > 0)
+            else if (isFloor == true && floorTimer > 0)
             {
                 floorTimer--;
-                if (ball.PaddleCollision(floorPaddle, false, false, 100) == 0)
+                foreach (Ball ba in balls)
+                {
+                    if (ba.PaddleCollision(floorPaddle, false, false, 100) == 0)
                 {
                     floorTimer = 0;
+                }
                 }
                 CollidePowerUps(floorPaddle);
             }
 
-            if (strongBallTimer > 0 && strongBall == true)
+            if (strongBallTimer > 0 && isStrongball == true)
             {
                 strongBallTimer--;
             }
-            else if (strongBallTimer <= 0 && strongBall == true)
+            else if (strongBallTimer <= 0 && isStrongball == true)
             {
-                strongBall = false;
+                isStrongball = false;
 
                 ballBrush.Color = Color.White;
             }
@@ -355,7 +375,7 @@ namespace BrickBreaker.Screens
 
                     {
                         //decreases struck block hp and removes blocks with hp 0
-                        if (strongBall == true)
+                        if (isStrongball == true)
                         {
                             b.hp -= 2;
                         }
@@ -521,8 +541,8 @@ namespace BrickBreaker.Screens
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
             e.Graphics.DrawRectangle(ballPen, paddle.x, paddle.y, paddle.width, paddle.height);
 
-            // Draws blocks
-            if (isBlindfold == false)         
+            // Draws blocks (pnly if blindfold is not on)
+            if (isBlindfold == false)
             {
                 foreach (Block b in blocks)
                 {
@@ -539,7 +559,7 @@ namespace BrickBreaker.Screens
             // Draws Powerups
             DrawPowerups(e);
 
-            if (floor == true)
+            if (isFloor == true)
             {
                 e.Graphics.FillRectangle(floorBrush, floorPaddle.x, floorPaddle.y, floorPaddle.width, floorPaddle.height);
             }
@@ -581,17 +601,17 @@ namespace BrickBreaker.Screens
             }
         }
 
-        public void CollidePowerUps(Paddle paddle)
+        public void CollidePowerUps(Paddle tempPaddle)
         {
             foreach (PowerUp p in powerUps)
             {
-                if (p.Collision(paddle) == true)
+                if (p.Collision(tempPaddle) == true)
                 {
                     switch (p.type)
                     {
                         case 0:
                             isMagnet = true;
-                            isMagnetTimer = 900;
+                            MagnetTimer = 900;
                             break;
                         case 1:
                             paddle.width += 80;
@@ -603,7 +623,7 @@ namespace BrickBreaker.Screens
                             balls.Add(tempBall);
                             break;
                         case 3:
-                            floor = true;
+                            isFloor = true;
                             floorTimer = 800;
                             break;
                         case 4:
@@ -614,7 +634,7 @@ namespace BrickBreaker.Screens
                             break;
                         case 6:
                             strongBallTimer = 400;
-                            strongBall = true;
+                            isStrongball = true;
                             ballBrush.Color = Color.Orange;
                             break;
                         case 7:
@@ -635,12 +655,14 @@ namespace BrickBreaker.Screens
 
         public void ResetPowerups()
         {
-            longPaddle = floor = isMagnet = strongBall = isShrooms = isBlindfold = false;
-            isMagnetTimer = floorTimer = strongBallTimer = shroomsTimer = blindfoldTimer = 0;
+            longPaddle = isFloor = isMagnet = isStrongball = isShrooms = isBlindfold = false;
+            MagnetTimer = floorTimer = strongBallTimer = shroomsTimer = blindfoldTimer = 0;
             pointsMultiplier = 1;
 
-            paddle.colour = Color.White;
-            ball.colour = Color.White;
+            paddle.width = 80;
+
+            paddleBrush.Color = Color.White;
+            ballBrush.Color = Color.White;
 
             powerUps.Clear();
         }
