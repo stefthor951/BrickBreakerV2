@@ -44,7 +44,7 @@
             this.hpLabelp2.AutoSize = true;
             this.hpLabelp2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hpLabelp2.ForeColor = System.Drawing.SystemColors.Control;
-            this.hpLabelp2.Location = new System.Drawing.Point(4, 4);
+            this.hpLabelp2.Location = new System.Drawing.Point(365, 0);
             this.hpLabelp2.Name = "hpLabelp2";
             this.hpLabelp2.Size = new System.Drawing.Size(45, 16);
             this.hpLabelp2.TabIndex = 0;
@@ -55,7 +55,7 @@
             this.hpLabelp1.AutoSize = true;
             this.hpLabelp1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hpLabelp1.ForeColor = System.Drawing.SystemColors.Control;
-            this.hpLabelp1.Location = new System.Drawing.Point(752, 534);
+            this.hpLabelp1.Location = new System.Drawing.Point(365, 534);
             this.hpLabelp1.Name = "hpLabelp1";
             this.hpLabelp1.Size = new System.Drawing.Size(45, 16);
             this.hpLabelp1.TabIndex = 1;
