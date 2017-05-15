@@ -8,17 +8,34 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrickBreaker;
+using BrickBreaker.Screens;
 
 namespace BrickBreaker
 {
     public partial class LoseScreen : UserControl
     {
-        Boolean leftArrowDown, downArrowDown, rightArrowDown, upArrowDown, spaceDown, vDown, bDown, nDown;
+        Boolean leftArrowDown, downArrowDown, rightArrowDown, upArrowDown, spaceDown;
+
+        private void LoseScreen_Load(object sender, EventArgs e)
+        {
+            scoreOutput.Text = "You scored " + Form1.currentScore + " points!";
+        }
+
         int index1, index2, index3, selected, lastSelected;
+        bool lastArrowDown;
 
         private void LoseScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             lastSelected = selected;
+
+            if (leftArrowDown || rightArrowDown )
+            {
+                lastArrowDown = true;
+            }
+            else
+            {
+                lastArrowDown = false;
+            }
 
             switch (e.KeyCode)
             {
@@ -37,109 +54,122 @@ namespace BrickBreaker
                 case Keys.Space:
                     spaceDown = true;
                     break;
-                case Keys.V:
-                    vDown = true;
-                    break;
-                case Keys.B:
-                    bDown = true;
-                    break;
-                case Keys.N:
-                    nDown = true;
-                    break;
                 default:
                     break;
             }
-
-            if (rightArrowDown == true)
+            if (lastArrowDown == false)
             {
-                if (selected == 4)
+                if (rightArrowDown == true)
                 {
-                    selected = 0;
+                    if (selected == 4)
+                    {
+                        selected = 0;
+                    }
+                    else
+                    {
+                        selected++;
+                    }
                 }
-                else
-                {
-                    selected++;
-                }              
-            }
 
-            if (leftArrowDown == true)
-            {
-                if (selected == 0)
+                if (leftArrowDown == true)
                 {
-                    selected = 4;
-                }
-                else
-                {
-                    selected--;
+                    if (selected == 0)
+                    {
+                        selected = 4;
+                    }
+                    else
+                    {
+                        selected--;
+                    }
                 }
             }
 
             switch (selected)
             {
-                case 0:                   
+                case 0:
                     nameText1.ForeColor = Color.Red;
 
-                    if (upArrowDown == true && index1 < 25)
+                    if (upArrowDown == true)
                     {
                         index1++;
+
+                        if (index1 == 26)
+                        {
+                            index1 = 0;
+                        }
                     }
 
-                    if (downArrowDown == true && index1 > 0)
+                    if (downArrowDown == true)
                     {
                         index1--;
+
+                        if (index1 == -1)
+                        {
+                            index1 = 25;
+                        }
                     }
                     break;
 
                 case 1:
                     nameText2.ForeColor = Color.Red;
 
-                    if (upArrowDown == true && index2 < 25)
+                    if (upArrowDown == true)
                     {
                         index2++;
+
+                        if (index2 == 26)
+                        {
+                            index2 = 0;
+                        }
                     }
 
-                    if (downArrowDown == true && index2 > 0)
+                    if (downArrowDown == true)
                     {
                         index2--;
+
+                        if (index2 == -1)
+                        {
+                            index2 = 25;
+                        }
                     }
                     break;
 
                 case 2:
                     nameText3.ForeColor = Color.Red;
 
-                    if (upArrowDown == true && index3 < 25)
+                    if (upArrowDown == true)
                     {
                         index3++;
+
+                        if (index3 == 26)
+                        {
+                            index3 = 0;
+                        }
                     }
 
-                    if (downArrowDown == true && index3 > 0)
+                    if (downArrowDown == true)
                     {
                         index3--;
+
+                        if (index3 == -1)
+                        {
+                            index3 = 25;
+                        }
                     }
                     break;
 
-                case 3:                  
-                    playButton.ForeColor = Color.Red;
-
-                    if (spaceDown == true)
-                    {
-                        // Goes to the game screen
-                        Form form = this.FindForm();
-                        Screens.GameScreen gs = new Screens.GameScreen();
-
-                        gs.Location = new Point((form.Width - gs.Width) / 2, (form.Height - gs.Height) / 2);
-
-                        form.Controls.Add(gs);
-                        form.Controls.Remove(this);
-                    }
-                    break;
-
-                case 4:
+                case 3:
                     menuButton.ForeColor = Color.Red;
 
                     if (spaceDown == true)
                     {
-                        // Goes to the main menu screen
+
+                        Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(Form1.currentLevel), Convert.ToString(Form1.currentScore));
+                        hs.save(hs);
+                        hs.saveScores(Form1.highscoreList);
+
+                        // Goes to the game screen
+
                         Form form = this.FindForm();
                         Screens.MenuScreen ms = new Screens.MenuScreen();
 
@@ -149,6 +179,27 @@ namespace BrickBreaker
                         form.Controls.Remove(this);
                     }
                     break;
+
+                case 4:
+                    playButton.ForeColor = Color.Red;
+
+                    if (spaceDown == true)
+                    {
+                        Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(Form1.currentLevel), Convert.ToString(Form1.currentScore));
+                        hs.save(hs);
+                        hs.saveScores(Form1.highscoreList);
+
+                        // Goes to the main menu screen
+
+                        Form form = this.FindForm();
+                        Screens.GameScreen gs = new Screens.GameScreen();
+
+                        gs.Location = new Point((form.Width - gs.Width) / 2, (form.Height - gs.Height) / 2);
+
+                        form.Controls.Add(gs);
+                        form.Controls.Remove(this);
+                    }
+                    break;               
             }
 
             if (selected != lastSelected)
@@ -168,12 +219,12 @@ namespace BrickBreaker
                         break;
 
                     case 3:
-                        playButton.ForeColor = Color.White;
+                        menuButton.ForeColor = Color.White;
                         break;
 
                     case 4:
-                        menuButton.ForeColor = Color.White;
-                        break;
+                        playButton.ForeColor = Color.White;
+                        break;                 
                 }
             }
 
@@ -447,15 +498,6 @@ namespace BrickBreaker
                     break;
                 case Keys.Space:
                     spaceDown = false;
-                    break;
-                case Keys.V:
-                    vDown = false;
-                    break;
-                case Keys.B:
-                    bDown = false;
-                    break;
-                case Keys.N:
-                    nDown = false;
                     break;
                 default:
                     break;

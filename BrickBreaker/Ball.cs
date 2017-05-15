@@ -14,12 +14,14 @@ namespace BrickBreaker
 {
     public class Ball
     {
-        public int x, y, xSpeed, ySpeed, size;
+        public int x, y, size;
         public Color colour;
+
+        public double xSpeed, ySpeed;
 
         public static Random rand = new Random();
 
-        public Ball(int _x, int _y, int _xSpeed, int _ySpeed, int _ballSize)
+        public Ball(int _x, int _y, double _xSpeed, double _ySpeed, int _ballSize)
         {
             x = _x;
             y = _y;
@@ -30,8 +32,8 @@ namespace BrickBreaker
 
         public void Move()
         {
-            x = x + xSpeed;
-            y = y + ySpeed;
+            x = Convert.ToInt16(x + xSpeed);
+            y = Convert.ToInt16(y + ySpeed);
         }
 
         public bool BlockCollision(Block b)
@@ -41,14 +43,14 @@ namespace BrickBreaker
 
             if (blockRec.IntersectsWith(ballRec))
             {
-                if (x <= (b.x + b.width))
+                if (x >= (b.x + b.width))
                     xSpeed = Math.Abs(xSpeed);
 
-                if ((x + size) >= b.x)
-                    xSpeed = -Math.Abs(xSpeed);
+                if ((x + size) <= b.x)
+                    xSpeed = -Math.Abs(ySpeed);
 
                 if (y <= (b.y + b.height))
-                    ySpeed = -ySpeed;
+                ySpeed = -ySpeed;
 
             }
 
@@ -63,33 +65,41 @@ namespace BrickBreaker
 
             ticksSinceHit++;
 
-            if (ballRec.IntersectsWith(paddleRec) && ticksSinceHit >= 60)
+            if (ballRec.IntersectsWith(paddleRec) && ticksSinceHit >= 10)
             {
 
                 Point intersect = intersectionRec.Location;
                 int intersectX = intersect.X;
 
+                Point mid = new Point(intersect.X + size / 2, intersect.Y);
+                int midX = mid.X;
 
-                if (x < p.x && (y + size) > p.y)
-                { 
-                    xSpeed = -Math.Abs(xSpeed);
-                    ySpeed = -Math.Abs(ySpeed);
-                }
-                else if (x + size > (p.x + p.width) && (y + size) > p.y)
-                {
-                    xSpeed = Math.Abs(xSpeed);
-                    ySpeed = -Math.Abs(ySpeed);
-                }
-                else
-                {
-                    ySpeed = -Math.Abs(ySpeed);
+                //magnitude of the ball's speed
+                double speed = Math.Sqrt(xSpeed * xSpeed + ySpeed * ySpeed);
 
-                }
+                //angle of deflection relative to straight left
+                double theta = 45;
+
+                //alters angle of deflection based on where the intersection lay relative to 0
+                double t = midX - p.x;
+                double f = (t / p.width);
+                theta = Math.PI * f;
+
+                //takes into account whether you are moving left or right
                 if (pMovingLeft)
-                    xSpeed = -Math.Abs(xSpeed);
+                    theta--;
                 else if (pMovingRight)
-                    xSpeed = Math.Abs(xSpeed);
+                    theta++;
 
+                //uses trig to calculate new x and y speeds
+                xSpeed = -Math.Cos(theta) * speed * 0.5;
+                ySpeed = -Math.Sqrt(speed - Math.Abs(xSpeed));
+
+                //prevents "speed slippage" by mathematically ensuring momentum will always be conserved
+                double diff = speed / Math.Sqrt(xSpeed * xSpeed + ySpeed * ySpeed);
+                xSpeed *= diff;
+                ySpeed *= diff;
+                
                 //returns 0 if collision occurs, resetting the number of ticks since the last collision
                 return 0;             
             }

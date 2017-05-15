@@ -38,11 +38,11 @@
             // titleLabel
             // 
             this.titleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 50.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.titleLabel.ForeColor = System.Drawing.Color.Firebrick;
-            this.titleLabel.Location = new System.Drawing.Point(139, 54);
+            this.titleLabel.Font = new System.Drawing.Font("Corbel", 50.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.ForeColor = System.Drawing.Color.Red;
+            this.titleLabel.Location = new System.Drawing.Point(142, 61);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(522, 67);
+            this.titleLabel.Size = new System.Drawing.Size(524, 67);
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "BRICK BREAKER";
             // 
@@ -88,9 +88,9 @@
             this.highScoreLabel.BackColor = System.Drawing.Color.Transparent;
             this.highScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.highScoreLabel.ForeColor = System.Drawing.Color.White;
-            this.highScoreLabel.Location = new System.Drawing.Point(269, 269);
+            this.highScoreLabel.Location = new System.Drawing.Point(259, 269);
             this.highScoreLabel.Name = "highScoreLabel";
-            this.highScoreLabel.Size = new System.Drawing.Size(262, 57);
+            this.highScoreLabel.Size = new System.Drawing.Size(310, 57);
             this.highScoreLabel.TabIndex = 4;
             this.highScoreLabel.Text = "HIGHSCORES";
             this.highScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -100,7 +100,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BackgroundImage = global::BrickBreaker.Properties.Resources.fadedBackground;
+            this.BackgroundImage = global::BrickBreaker.Properties.Resources.mainScreenBack;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.highScoreLabel);
             this.Controls.Add(this.optionLabel);
