@@ -251,7 +251,7 @@ namespace BrickBreaker
         {
             gameTimer.Enabled = false;
 
-            DialogResult result = PauseScreen.Show("Quit the Game?", "Testing", "Yes", "No");
+            DialogResult result = PauseScreen.Show("Quit the Game?", /*"Testing",*/ "Yes", "No");
 
             switch (result)
             {
