@@ -92,7 +92,7 @@ namespace BrickBreaker
                     theta++;
 
                 //uses trig to calculate new x and y speeds
-                xSpeed = -Math.Cos(theta) * speed * 0.5;
+                xSpeed = Math.Cos(theta) * speed * 0.5;
                 ySpeed = -Math.Sqrt(speed - Math.Abs(xSpeed));
 
                 //prevents "speed slippage" by mathematically ensuring momentum will always be conserved

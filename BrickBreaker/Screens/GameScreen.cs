@@ -58,10 +58,10 @@ namespace BrickBreaker.Screens
         Boolean leftArrowDown, downArrowDown, rightArrowDown, upArrowDown, spaceDown, escapeDown;
 
         // Game values
-        public static int lives, paddleSpeed, xSpeed, ySpeed, ticksSinceHit;
+        public static int lives, paddleSpeed, xSpeed, ySpeed, ticksSinceHit, currentLevel = 1;
 
-        int currentLevel = 1, totalLevels;
-
+        int totalLevels;
+        
         string levelToLoad;
 
 
@@ -252,6 +252,8 @@ namespace BrickBreaker.Screens
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+
+
             // Move the paddle
             //swaps controls when shrooms is active
             if (isShroomsControls)
