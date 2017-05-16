@@ -85,7 +85,7 @@ namespace BrickBreaker
             System.Drawing.Rectangle rect1 = new System.Drawing.Rectangle(xCoord, yCoord, 20, 20);
             System.Drawing.Rectangle rect2 = new System.Drawing.Rectangle(paddle.x, paddle.y, paddle.width, paddle.height);
             
-            if (rect1.IntersectsWith(rect2))
+            if (rect1.IntersectsWith(rect2))  
             {
                 Form1.player1.Stop(); 
                 Form1.player1.Play();
