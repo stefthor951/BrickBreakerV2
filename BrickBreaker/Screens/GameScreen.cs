@@ -394,6 +394,9 @@ namespace BrickBreaker.Screens
                     if (ba.BlockCollision(b))
 
                     {
+                        //Play Sound
+                        Form1.brickPlayer.Play();
+
                         //decreases struck block hp and removes blocks with hp 0
                         if (isStrongball == true)
                         {
@@ -454,8 +457,12 @@ namespace BrickBreaker.Screens
                     {
                         lives--;
 
+                        //Play Sound
+                        Form1.back_B_Player.Play();
+
                         //You suck! Lose all powerups!
                         ResetPowerups();
+
 
                         // Moves the ball back to origin
                         ba.x = ((paddle.x - (ba.size / 2)) + (paddle.width / 2));
@@ -670,7 +677,6 @@ namespace BrickBreaker.Screens
                             isBlindfold = true;
                             break;
                     }
-
                     powerUps.Remove(p);
                     break;
                 }
