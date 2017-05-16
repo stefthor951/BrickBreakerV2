@@ -321,6 +321,9 @@ namespace BrickBreaker.Screens
                     if (ba.BlockCollision(b))
 
                     {
+                        //Play Sound
+                        Form1.brickPlayer.Play();
+
                         //decreases struck block hp and removes blocks with hp 0
                         b.hp--;
                         if (b.hp == 0)
@@ -399,6 +402,9 @@ namespace BrickBreaker.Screens
                     else
                     {
                         lives--;
+
+                        //Play Sound
+                        Form1.back_B_Player.Play();
 
                         // Moves the ball back to origin
                         ba.x = ((paddle.x - (ba.size / 2)) + (paddle.width / 2));
@@ -560,7 +566,10 @@ namespace BrickBreaker.Screens
             foreach (PowerUp p in powerUps)
             {
                 if (p.Collision(paddle) == true)
-                {
+                {                
+                    //play powerup sound                
+                    Form1.powerupPlayer.Play();
+
                     powerUps.Remove(p);
                     activePowerUps.Add(p);
                     break;

@@ -87,6 +87,8 @@ namespace BrickBreaker
             
             if (rect1.IntersectsWith(rect2))
             {
+                Form1.player1.Stop(); 
+                Form1.player1.Play();
                 return true;
             }
             else

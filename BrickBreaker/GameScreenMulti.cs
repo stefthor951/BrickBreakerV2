@@ -56,6 +56,9 @@ namespace BrickBreaker
 
         public void OnStart()
         {
+            //play opening sound
+            Form1.disappearPlayer.Play();
+
             //display player hp's
             hpLabelp1.Text = "HP: " + p1HP.ToString();
             hpLabelp2.Text = "HP: " + p2HP.ToString();
@@ -267,7 +270,7 @@ namespace BrickBreaker
                     if (blocks1p.Count == 0 && p1HP >= 0)
                     {
                         gameTimer.Enabled = false;
-                        //TODO say who won
+                        //TODO say who won                    
                         OnEnd();
                     }
 
