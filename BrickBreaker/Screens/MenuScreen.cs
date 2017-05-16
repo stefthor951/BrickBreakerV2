@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace BrickBreaker.Screens
 {
@@ -52,8 +53,9 @@ namespace BrickBreaker.Screens
                         //start button
 
                         case 0:
-                            InstructionScreen si = new InstructionScreen();
+                            Form1.back_A_Player.Play();
 
+                            InstructionScreen si = new InstructionScreen();
                             form.Controls.Add(si);
                             form.Controls.Remove(this);
 
@@ -62,8 +64,9 @@ namespace BrickBreaker.Screens
 
                         //highscore button
                         case 1:
-                            HighscoreScreen hs = new HighscoreScreen();
+                            Form1.select_B_Player.Play();
 
+                            HighscoreScreen hs = new HighscoreScreen();
                             form.Controls.Add(hs);
                             form.Controls.Remove(this);
 
@@ -73,6 +76,7 @@ namespace BrickBreaker.Screens
 
                         //option button
                         case 2:
+
                             OptionScreen os = new OptionScreen();
 
                             form.Controls.Add(os);
@@ -83,6 +87,8 @@ namespace BrickBreaker.Screens
 
                         //exit button
                         case 3:
+                            Form1.errorPlayer.Play();
+                            Thread.Sleep(1000);
                             Application.Exit();
                             break;
                     }

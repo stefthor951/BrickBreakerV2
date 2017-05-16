@@ -28,6 +28,9 @@ namespace BrickBreaker
             hardButton.BackColor = Color.White;
             impossibleButton.BackColor = Color.White;
             difficulty = 1;
+
+            //play sound
+            Form1.pickPlayer.Play();
         }
 
         private void mediumButton_Click(object sender, EventArgs e)
@@ -39,7 +42,10 @@ namespace BrickBreaker
             hardButton.BackColor = Color.White;
             impossibleButton.BackColor = Color.White;
             difficulty = 2;
-            
+
+            //play sound
+            Form1.pickPlayer.Play();
+
         }
 
         private void hardButton_Click(object sender, EventArgs e)
@@ -51,6 +57,9 @@ namespace BrickBreaker
             mediumButton.BackColor = Color.White;
             impossibleButton.BackColor = Color.White;
             difficulty = 3;
+
+            //play sound
+            Form1.pickPlayer.Play();
         }
 
         private void impossibleButton_Click(object sender, EventArgs e)
@@ -59,13 +68,18 @@ namespace BrickBreaker
             impossibleButton.BackColor = Color.Purple;
             easyButton.BackColor = Color.White;
             mediumButton.BackColor = Color.White;
-            hardButton.BackColor = Color.White;
-            
+            hardButton.BackColor = Color.White;            
             difficulty = 4;
+
+            //play sound
+            Form1.pickPlayer.Play();
         }
         
         private void button1_Click(object sender, EventArgs e)
         {
+            //play sound
+            Form1.back_B_Player.Play();
+
             Form f = this.FindForm();
             f.Controls.Remove(this);
 
@@ -103,7 +117,10 @@ namespace BrickBreaker
 
 
         private void acceptButton_Click(object sender, EventArgs e)
-        {   
+        {
+            //play sound
+            Form1.appearPlayer.Play();
+
             switch (difficulty)
             {
                 case 0:

@@ -43,7 +43,13 @@ namespace BrickBreaker
 
             if (blockRec.IntersectsWith(ballRec))
             {
+
+                //play sound
+                Form1.player2.Stop();
+                Form1.player2.Play();
+
                 if (x >= (b.x + b.width))
+
                     xSpeed = Math.Abs(xSpeed);
 
                 if ((x + size) <= b.x)
@@ -67,6 +73,8 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(paddleRec) && ticksSinceHit >= 10)
             {
+                //Play sound
+                Form1.paddlePlayer.Play();
 
                 Point intersect = intersectionRec.Location;
                 int intersectX = intersect.X;
@@ -112,7 +120,10 @@ namespace BrickBreaker
         {
             // Collision with left wall
             if (x <= 0)
-            {   
+            {
+                //Play sound 
+                Form1.wallPlayer.Play();
+
                 xSpeed *= -1;
 
                 //corrects wall sticking glitch
@@ -121,7 +132,10 @@ namespace BrickBreaker
             }
             // Collision with right wall
             if (x >= (UC.Width - size))
-            {             
+            {
+                //Play sound 
+                Form1.wallPlayer.Play();
+
                 xSpeed *= -1;
 
                 //corrects wall sticking glitch
@@ -131,6 +145,9 @@ namespace BrickBreaker
             // Collision with top wall
             if (y <= 2)
             {   
+                //Play sound 
+                Form1.wallPlayer.Play();
+
                 ySpeed *= -1;
 
                 //corrects wall sticking glitch
