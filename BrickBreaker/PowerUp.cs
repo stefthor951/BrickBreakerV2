@@ -17,7 +17,7 @@ namespace BrickBreaker
         /// <param name="_xCoord">X coordinate of the powerup</param>
         /// <param name="_yCoord">Y coordinate of the powerup</param>
         /// <param name="_fallSpeed">falling speed of the powerup</param>
-        /// <param name="_type">Type of Powerup (0 = isMagnet, 1 = long paddle, 2 = multiball, 3 = floor shield, 4 = extra life, 5 = double points, 6 = strong ball)</param>
+        /// <param name="_type">Type of Powerup (0 = isMagnet, 1 = long paddle, 2 = multiball, 3 = floor shield, 4 = extra life, 5 = double points, 6 = strong ball, 7 = shrooms, 8 = blindfold)</param>
         public PowerUp(int _xCoord, int _yCoord, int _size, int _fallSpeed, int _type)
         {
             xCoord = _xCoord;
@@ -38,11 +38,11 @@ namespace BrickBreaker
 
                 if (n > 0)
                 {
-                    xCoord--;
+                    xCoord-=2;
                 }
                 else if (n < 0)
                 {
-                    xCoord++;
+                    xCoord+=2;
                 }
             }
         }
@@ -71,6 +71,12 @@ namespace BrickBreaker
                     break;
                 case 6:
                     s.Color = System.Drawing.Color.Orange;
+                    break;
+                case 7:
+                    s.Color = System.Drawing.Color.Purple;
+                    break;
+                case 8:
+                    s.Color = System.Drawing.Color.Black;
                     break;
                 default:
                     s.Color = System.Drawing.Color.White;

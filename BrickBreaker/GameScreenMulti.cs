@@ -18,11 +18,29 @@ namespace BrickBreaker
         #region global values
 
         //player1 button control keys - DO NOT CHANGE
-        Boolean leftArrowDown, downArrowDown, rightArrowDown, upArrowDown, spaceDown;
+        Boolean leftArrowDown, downArrowDown, rightArrowDown, upArrowDown, spaceDown, escapeDown;
 
 
         //player2 button control keys - DO NOT CHANGE
         Boolean aKeyDown, sKeyDown, dKeyDown, wKeyDown, qKeyDown;
+
+        #region Stefan and Jack's values
+        // Creates powerup list
+        List<PowerUp> powerUps = new List<PowerUp>();
+        List<PowerUp> activePowerUps = new List<PowerUp>();
+
+        int longPaddleCounter = 0;
+        bool longPaddle = false;
+        bool isMagnet = false;
+        int isMagnetTimer = 0;
+        bool floor = false;
+        int floorTimer = 0;
+
+        Paddle floorPaddle;
+
+        SolidBrush powerupBrush = new SolidBrush(Color.Green);
+        SolidBrush floorBrush = new SolidBrush(Color.Cyan);
+        #endregion
 
         // Game values
 
@@ -31,6 +49,7 @@ namespace BrickBreaker
 
         int lives, ticksSinceHit;
 
+        public static bool player1Won, player2Won;
 
         // Paddle and Ball objects
         Paddle paddle, paddle2;
@@ -60,11 +79,16 @@ namespace BrickBreaker
             Form1.disappearPlayer.Play();
 
             //display player hp's
-            hpLabelp1.Text = "HP: " + p1HP.ToString();
-            hpLabelp2.Text = "HP: " + p2HP.ToString();
+            hpLabelp1.Text = "Player 1 HP: " + p1HP.ToString();
+            hpLabelp2.Text = "Player 2 HP: " + p2HP.ToString();
 
             //initializes ticks since hit counter
-            ticksSinceHit = 10;
+            ticksSinceHit = 100;
+
+            #region Stefan and Jacks Powerups
+            //initiate floor paddle
+            floorPaddle = new Paddle(0, this.Height - 10, this.Width, 10, 0, Color.Cyan);
+            #endregion
 
             //set all button presses to false.
             leftArrowDown = downArrowDown = rightArrowDown = upArrowDown = false;
@@ -87,7 +111,7 @@ namespace BrickBreaker
 
             // setup starting ball values
             int ballX = ((this.Width / 2) - 10);
-            int ballY = (this.Height - paddle.height) - 80;
+            int ballY = (this.Height - paddle.height) - 100;
 
             // Creates a new ball
             int xSpeed = 6;
@@ -103,21 +127,21 @@ namespace BrickBreaker
             
 
             //blocks in this mode will always be the same
-            while (blocks1p.Count < 12)
+            while (blocks2p.Count < 12)
             {
                 x += 57;
                 Block b = new Block(x, 10, 1, Color.White);
-                blocks1p.Add(b);
+                blocks2p.Add(b);
             }
 
             x = 10;
 
             //blocks in this mode will always be the same
-            while (blocks2p.Count < 12)
+            while (blocks1p.Count < 12)
             {
                 x += 57;
-                Block b = new Block(x, 500, 1, Color.White);
-                blocks2p.Add(b);
+                Block b1 = new Block(x, 500, 1, Color.White);
+                blocks1p.Add(b1);
 
             }
 
@@ -145,6 +169,10 @@ namespace BrickBreaker
                     break;
                 case Keys.Space:
                     spaceDown = true;
+                    break;
+                case Keys.Escape:
+                    escapeDown = true;
+                    manuel();
                     break;
                 default:
                     break;
@@ -222,6 +250,27 @@ namespace BrickBreaker
             }
         }
 
+        public void manuel()
+        {
+            gameTimer.Enabled = false;
+
+            DialogResult result = PauseScreen.Show("Quit the Game?", "Testing", "Yes", "No");
+
+            switch (result)
+            {
+                case DialogResult.No:
+                    gameTimer.Enabled = true;
+                    escapeDown = false;
+                    leftArrowDown = false;
+                    rightArrowDown = false;
+                    break;
+
+                case DialogResult.Yes:
+                    Application.Exit();
+                    break;
+            }
+        }
+
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             // Move the paddle for p1
@@ -243,6 +292,53 @@ namespace BrickBreaker
             {
                 paddle2.Move("right");
             }
+
+            #region Stefan and Jacks PowerUps
+
+            if (isMagnetTimer > 0 && isMagnet == true)
+            {
+                isMagnetTimer--;
+            }
+            else if (isMagnetTimer <= 0 && isMagnet == true)
+            {
+                isMagnet = false;
+            }
+
+            if (longPaddle == true)
+            {
+                longPaddleCounter++;
+                if (longPaddleCounter >= 14 && paddle.width > 80)
+                {
+                    longPaddleCounter = 0;
+                    paddle.x++;
+                    paddle.width -= 2;
+                }
+                else if (paddle.width <= 80 && longPaddleCounter >= 14)
+                {
+                    longPaddleCounter = 0;
+                    longPaddle = false;
+                }
+            }
+
+            if (floor == true && floorTimer <= 0)
+            {
+                floor = false;
+            }
+            else if (floor == true && floorTimer > 0)
+            {
+                floorTimer--;
+                if (ball.PaddleCollision(floorPaddle, false, false, 100) == 0)
+                {
+                    floorTimer = 0;
+                }
+            }
+
+            // Moves powerups
+            MovePowerups(powerUps);
+
+            // Check for collision with powerups and paddle
+            CollidePowerUps(paddle);
+            #endregion
 
             // Moves ball
             ball.Move();
@@ -266,11 +362,19 @@ namespace BrickBreaker
                     //reduce life of player
                     p1HP--;
 
-                    hpLabelp1.Text = "HP: " + p1HP.ToString();
-                    if (blocks1p.Count == 0 && p1HP >= 0)
+                    Random n = new Random();
+                    if (n.Next(0, 1) == 0)
+                    {
+                        PowerUp p = new PowerUp(b.x, b.y, 20, -3, n.Next(0, 7));
+                        powerUps.Add(p);
+                    }
+
+                    hpLabelp1.Text = "Player 1 HP: " + p1HP.ToString();
+                    if (blocks1p.Count == 0 && p1HP <= 0)//if player 1 runs out of blocks
                     {
                         gameTimer.Enabled = false;
-                        //TODO say who won                    
+                        player1Won = false;
+                        player2Won = true;
                         OnEnd();
                     }
 
@@ -288,11 +392,19 @@ namespace BrickBreaker
 
                     p2HP--;
 
-                    hpLabelp2.Text = "HP: " + p2HP.ToString();
-                    if (blocks2p.Count == 0 && p2HP >= 0)
+                    Random n = new Random();
+                    if (n.Next(0, 1) == 0)
+                    {
+                        PowerUp p = new PowerUp(b.x, b.y, 20, 3, n.Next(0, 7));
+                        powerUps.Add(p);
+                    }
+
+                    hpLabelp2.Text = "Player 2 HP: " + p2HP.ToString();
+                    if (blocks2p.Count == 0 && p2HP <= 0)
                     {
                         gameTimer.Enabled = false;
-
+                        player2Won = false;
+                        player1Won = true;
                         OnEnd();
                     }
 
@@ -314,17 +426,23 @@ namespace BrickBreaker
         public void OnEnd()
         {
             // Goes to the game over screen
+
             Form form = this.FindForm();
-            MenuScreen ps = new MenuScreen();
+            LoseScreenMulti lsm = new LoseScreenMulti();
 
-            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+            lsm.Location = new Point((form.Width - lsm.Width) / 2, (form.Height - lsm.Height) / 2);
 
-            form.Controls.Add(ps);
+            form.Controls.Add(lsm);
             form.Controls.Remove(this);
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            Image backImage = BrickBreaker.Properties.Resources.fadedBackground;
+
+            Rectangle backRect = new Rectangle((0 - 400) - paddle.x, 0, this.Width * 3, this.Height);
+            e.Graphics.DrawImage(backImage, backRect);
+
             // Draws paddles
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
             e.Graphics.FillRectangle(paddleBrush, paddle2.x, paddle2.y, paddle.width, paddle.height);
@@ -339,9 +457,67 @@ namespace BrickBreaker
                 e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
             }
 
+            #region Stefan and Jacks Powerups
+            // Draws Powerups
+            DrawPowerups(e);
+
+            if (floor == true)
+            {
+                e.Graphics.FillRectangle(floorBrush, floorPaddle.x, floorPaddle.y, floorPaddle.width, floorPaddle.height);
+            }
+            #endregion
             // Draws balls
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
         }
 
+
+        #region Stefan and Jack's Powerup Methods
+        public void GeneratePowerUp(int brickX, int brickY)
+        {
+            Random n = new Random();
+
+            if (n.Next(0, 1) == 0)
+            {
+                PowerUp p = new PowerUp(brickX, brickY, 20, 3, n.Next(0, 7));
+                powerUps.Add(p);
+            }
+        }
+
+        public void MovePowerups(List<PowerUp> powerUps)
+        {
+            foreach (PowerUp p in powerUps)
+            {
+                p.Move(paddle, isMagnet);
+            }
+        }
+
+        public void DrawPowerups(PaintEventArgs e)
+        {
+            foreach (PowerUp p in powerUps)
+            {
+                p.DrawPowerUp(powerupBrush, e);
+            }
+        }
+
+        public void CollidePowerUps(Paddle paddle)
+        {
+            foreach (PowerUp p in powerUps)
+            {
+                if (p.Collision(paddle) == true)
+                {
+                    powerUps.Remove(p);
+                    activePowerUps.Add(p);
+                    break;
+                }
+                if (p.Collision(paddle2) == true)
+                {
+                    powerUps.Remove(p);
+                    activePowerUps.Add(p);
+                    break;
+                }
+            }
+        }
+
+        #endregion
     }
 }

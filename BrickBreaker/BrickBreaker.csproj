@@ -88,6 +88,12 @@
     <Compile Include="InstructionScreen.designer.cs">
       <DependentUpon>InstructionScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoseScreenMulti.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LoseScreenMulti.Designer.cs">
+      <DependentUpon>LoseScreenMulti.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -135,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InstructionScreen.resx">
       <DependentUpon>InstructionScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoseScreenMulti.resx">
+      <DependentUpon>LoseScreenMulti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionScreen.resx">
       <DependentUpon>OptionScreen.cs</DependentUpon>
@@ -272,6 +281,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Brick-Breaker.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\joyStick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\life.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lostLife.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mainScreenBack.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\joyStick01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buttonBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackk.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
