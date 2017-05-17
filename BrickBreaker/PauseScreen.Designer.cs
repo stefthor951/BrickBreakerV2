@@ -36,19 +36,22 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Location = new System.Drawing.Point(84, 87);
+            this.titleLabel.Font = new System.Drawing.Font("Kozuka Gothic Pro B", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.ForeColor = System.Drawing.Color.Red;
+            this.titleLabel.Location = new System.Drawing.Point(23, 24);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(98, 13);
+            this.titleLabel.Size = new System.Drawing.Size(227, 38);
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "QUIT THE GAME?";
             // 
             // yesButton
             // 
             this.yesButton.BackColor = System.Drawing.Color.Transparent;
+            this.yesButton.FlatAppearance.BorderSize = 0;
             this.yesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.yesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.yesButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.yesButton.Location = new System.Drawing.Point(56, 135);
+            this.yesButton.ForeColor = System.Drawing.Color.Red;
+            this.yesButton.Location = new System.Drawing.Point(30, 77);
             this.yesButton.Name = "yesButton";
             this.yesButton.Size = new System.Drawing.Size(75, 23);
             this.yesButton.TabIndex = 1;
@@ -60,7 +63,7 @@
             // noButton
             // 
             this.noButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.noButton.Location = new System.Drawing.Point(165, 135);
+            this.noButton.Location = new System.Drawing.Point(163, 77);
             this.noButton.Name = "noButton";
             this.noButton.Size = new System.Drawing.Size(75, 23);
             this.noButton.TabIndex = 2;
@@ -73,9 +76,9 @@
             this.AcceptButton = this.yesButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Red;
+            this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.noButton;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(275, 125);
             this.Controls.Add(this.noButton);
             this.Controls.Add(this.yesButton);
             this.Controls.Add(this.titleLabel);

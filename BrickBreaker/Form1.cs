@@ -76,6 +76,12 @@ namespace BrickBreaker
         public static PictureBox heartImage1 = new PictureBox();
         public static PictureBox heartImage2 = new PictureBox();
         public static PictureBox heartImage3 = new PictureBox();
+        public static PictureBox heartImage4 = new PictureBox();
+        public static PictureBox heartImage5 = new PictureBox();
+        public static Label levelLabel = new Label();
+        public static Label scoreLabel = new Label();
+
+
 
         private void pictureBoxes(PictureBox x)
         {
@@ -83,17 +89,34 @@ namespace BrickBreaker
             x.Size = new Size(50, 45);
             x.BackColor = Color.White;
             x.BackgroundImageLayout = ImageLayout.Stretch;
+        }
 
+        private void labels (Label x)
+        {
+            Controls.Add(x);
+            x.Font = new Font("Kozuka Gothic Pro", 20, FontStyle.Bold);
+            x.Size = new Size(400, 40);
+            x.BackColor = Color.Transparent;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            labels(levelLabel);
+            labels(scoreLabel);
+            levelLabel.Location = new Point(960, 670);
+            scoreLabel.Location = new Point(800, 60);
+
             pictureBoxes(heartImage1);
             pictureBoxes(heartImage2);
             pictureBoxes(heartImage3);
+            pictureBoxes(heartImage4);
+            pictureBoxes(heartImage5);
+
             heartImage1.Location = new Point(300, 55);
             heartImage2.Location = new Point(360, 55);
             heartImage3.Location = new Point(420, 55);
-          
+            heartImage4.Location = new Point(480, 55);
+            heartImage5.Location = new Point(540, 55);
+
 
             // Start the program centred on the Menu Screen
             MenuScreen ps = new MenuScreen();

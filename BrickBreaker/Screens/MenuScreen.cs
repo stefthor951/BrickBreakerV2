@@ -20,6 +20,7 @@ namespace BrickBreaker.Screens
         public MenuScreen()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
         }
 
         private void MenuScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -53,13 +54,14 @@ namespace BrickBreaker.Screens
                         //start button
 
                         case 0:
-                            Form1.back_A_Player.Play();
+                            InstructionScreen si = new InstructionScreen();
+                            si.Location = new Point((form.Width - si.Width) / 2, (form.Height - si.Height) / 2);
+
 
                             InstructionScreen si = new InstructionScreen();
                             form.Controls.Add(si);
                             form.Controls.Remove(this);
 
-                            si.Location = new Point((form.Width - si.Width) / 2, (form.Height - si.Height) / 2);
                             break;
 
                         //highscore button
