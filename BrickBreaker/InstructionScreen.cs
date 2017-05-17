@@ -19,6 +19,7 @@ namespace BrickBreaker.Screens
         public InstructionScreen()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
         }
 
         private void InstructionScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
