@@ -13,6 +13,7 @@ using BrickBreaker.Screens;
 using System.Xml;
 using System.Media;
 using BrickBreaker;
+using System.IO;
 
 /// <summary>
 ///  Long paddle 
@@ -36,20 +37,22 @@ namespace BrickBreaker
         public static SoundPlayer disappearPlayer = new SoundPlayer(Properties.Resources.Alert_Dissappear);
         public static SoundPlayer errorPlayer = new SoundPlayer(Properties.Resources.Alert_Error);
         public static SoundPlayer back_A_Player = new SoundPlayer(Properties.Resources.Back_A);
-        public static SoundPlayer select_A_Player = new SoundPlayer(Properties.Resources.Select_A);
+        public static SoundPlayer powerupPlayer = new SoundPlayer(Properties.Resources.Select_A);
         public static SoundPlayer back_B_Player = new SoundPlayer(Properties.Resources.Back_B);
         public static SoundPlayer select_B_Player = new SoundPlayer(Properties.Resources.Select_B);
         public static SoundPlayer brickPlayer = new SoundPlayer(Properties.Resources.brickBounce);
         public static SoundPlayer paddlePlayer = new SoundPlayer(Properties.Resources.paddleBounce);
         public static SoundPlayer wallPlayer = new SoundPlayer(Properties.Resources.wallBounce);
         public static SoundPlayer pickPlayer = new SoundPlayer(Properties.Resources.Pick);
-        
+
+        public static System.Windows.Media.MediaPlayer player1;
+        public static System.Windows.Media.MediaPlayer player2;
+
         //public static SoundPlayer player = new SoundPlayer(Properties.)
 
         public static List<Highscore> highscoreList = new List<Highscore>();
-        public static int currentScore, paddleSpeed, lives, xSpeed, ySpeed;
-
-     
+        public static int currentScore, currentLevel, paddleSpeed, lives, xSpeed, ySpeed;
+       
 
         // add a new comment
 
@@ -61,8 +64,14 @@ namespace BrickBreaker
             lives = 3;
             paddleSpeed = 10;
             xSpeed = ySpeed = 6;
-            this.DoubleBuffered = true;
-    }
+
+            player1 = new System.Windows.Media.MediaPlayer();
+            player1.Open(new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Resources/Select_A.wav")));
+
+            player2 = new System.Windows.Media.MediaPlayer();
+            player2.Open(new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Resources/brickBounce.wav")));
+        }
+
 
         public static PictureBox heartImage1 = new PictureBox();
         public static PictureBox heartImage2 = new PictureBox();
@@ -126,17 +135,20 @@ namespace BrickBreaker
             parent = doc.DocumentElement;
             foreach (XmlNode child in parent.ChildNodes)
             {
-                Highscore hs = new Highscore(null, null);
+                Highscore hs = new Highscore(null, null, null);
                 foreach (XmlNode grandChild in child.ChildNodes)
                 {
                     if (grandChild.Name == "name")
                     {
                         hs.name = grandChild.InnerText;
                     }
+                    if (grandChild.Name == "level")
+                    {
+                        hs.level = grandChild.InnerText;
+                    }
                     if (grandChild.Name == "score")
                     {
                         hs.score = grandChild.InnerText;
-                        //scores.Add(Convert.ToInt16(child.InnerText));
                     }
                 }
                 highscoreList.Add(hs);

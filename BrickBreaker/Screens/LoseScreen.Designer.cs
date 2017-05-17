@@ -101,6 +101,7 @@
             // 
             // scoreOutput
             // 
+            this.scoreOutput.BackColor = System.Drawing.Color.Transparent;
             this.scoreOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scoreOutput.ForeColor = System.Drawing.Color.White;
             this.scoreOutput.Location = new System.Drawing.Point(3, 242);
@@ -115,6 +116,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
+            this.BackgroundImage = global::BrickBreaker.Properties.Resources.texture4;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.scoreOutput);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.menuButton);
@@ -124,6 +127,7 @@
             this.DoubleBuffered = true;
             this.Name = "LoseScreen";
             this.Size = new System.Drawing.Size(800, 550);
+            this.Load += new System.EventHandler(this.LoseScreen_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.LoseScreen_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.LoseScreen_PreviewKeyDown);
             this.ResumeLayout(false);
