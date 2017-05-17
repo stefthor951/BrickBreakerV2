@@ -45,7 +45,7 @@ namespace BrickBreaker
             {
 
                 //play sound
-                Form1.player2.Stop();
+                //Form1.player2.Stop();
                 Form1.player2.Play();
 
                 if (x >= (b.x + b.width))

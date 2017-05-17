@@ -58,7 +58,7 @@ namespace BrickBreaker.Screens
                             si.Location = new Point((form.Width - si.Width) / 2, (form.Height - si.Height) / 2);
 
 
-                            InstructionScreen si = new InstructionScreen();
+                            //InstructionScreen si = new InstructionScreen();
                             form.Controls.Add(si);
                             form.Controls.Remove(this);
 
