@@ -11,7 +11,7 @@ using System.Media;
 using BrickBreaker;
 using BrickBreaker.Screens;
 namespace BrickBreaker
-{//multiplayer gamescreen by Daniel Clarke
+{//multiplayer gamescreen by Daniel Clarke fewgw
     public partial class GameScreenMulti : UserControl
     {
 
