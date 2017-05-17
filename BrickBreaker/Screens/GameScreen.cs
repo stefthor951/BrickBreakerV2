@@ -92,10 +92,7 @@ namespace BrickBreaker.Screens
 
         public void OnStart()
         {
-            //lives Images
-            Form1.heartImage1.BackgroundImage = Properties.Resources.life;
-            Form1.heartImage2.BackgroundImage = Properties.Resources.life;
-            Form1.heartImage3.BackgroundImage = Properties.Resources.life;
+           
 
             //Resets score
             Form1.currentScore = 0;
@@ -220,6 +217,40 @@ namespace BrickBreaker.Screens
 
         }
 
+        private void GameScreen_Load(object sender, EventArgs e)
+        {
+            //lives Images
+            Form1.heartImage1.BackgroundImage = Properties.Resources.life;
+            Form1.heartImage2.BackgroundImage = Properties.Resources.life;
+            Form1.heartImage3.BackgroundImage = Properties.Resources.life;
+             Form1.heartImage4.BackgroundImage = Properties.Resources.life;
+             Form1.heartImage5.BackgroundImage = Properties.Resources.life;
+            livesImages();
+        }
+
+        public void livesImages()
+        {
+            if (lives == 5)
+            {
+                Form1.heartImage5.BackgroundImage = Properties.Resources.life;
+            }
+            if (lives == 4)
+            {   Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage4.BackgroundImage = Properties.Resources.life;
+            }
+            if (lives == 3)
+            {
+                Form1.heartImage3.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage4.BackgroundImage = Properties.Resources.lostLife;
+            }
+            if (lives == 2)
+            {
+                Form1.heartImage3.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage2.BackgroundImage = Properties.Resources.life;
+            }
+            if (lives == 1) { Form1.heartImage2.BackgroundImage = Properties.Resources.lostLife; }
+        }
         public void manuel()
         {
             gameTimer.Enabled = false;
@@ -249,6 +280,10 @@ namespace BrickBreaker.Screens
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            Form1.scoreLabel.Text = "   Score: " + Form1.currentScore.ToString("000000") + " x" + pointsMultiplier;
+            Form1.levelLabel.Text = "Level: " + currentLevel;
+
+
             // Move the paddle
             //swaps controls when shrooms is active
             if (isShrooms)
@@ -453,8 +488,7 @@ namespace BrickBreaker.Screens
                     }
 
                     //lives Images
-                    if (lives == 2) { Form1.heartImage3.BackgroundImage = Properties.Resources.lostLife; }
-                    if (lives == 1) { Form1.heartImage2.BackgroundImage = Properties.Resources.lostLife; }
+                    livesImages();
 
                     if (lives == 0)
                     {
@@ -477,6 +511,8 @@ namespace BrickBreaker.Screens
         //Added by Lake
         public void loadLevel(string Level)
         {
+            if(lives > 5) { lives = 5; }
+
             //clear list of blocks
             blocks.Clear();
 
