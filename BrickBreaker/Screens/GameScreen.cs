@@ -58,10 +58,10 @@ namespace BrickBreaker.Screens
         Boolean leftArrowDown, downArrowDown, rightArrowDown, upArrowDown, spaceDown, escapeDown;
 
         // Game values
-        public static int lives, paddleSpeed, xSpeed, ySpeed, ticksSinceHit;
+        public static int lives, paddleSpeed, xSpeed, ySpeed, ticksSinceHit, currentLevel = 1;
 
-        int currentLevel = 1, totalLevels;
-
+        int totalLevels;
+        
         string levelToLoad;
 
 
@@ -283,8 +283,10 @@ namespace BrickBreaker.Screens
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+
             Form1.scoreLabel.Text = "   Score: " + Form1.currentScore.ToString("000000") + " x" + pointsMultiplier;
             Form1.levelLabel.Text = "Level: " + currentLevel;
+
 
 
             // Move the paddle
