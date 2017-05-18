@@ -613,11 +613,7 @@ namespace BrickBreaker.Screens
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-            Image backImage = BrickBreaker.Properties.Resources.texture4;           
-            Rectangle backRect = new Rectangle((0 - 400) - paddle.x, 0, this.Width * 3, this.Height);
-            e.Graphics.DrawImage(backImage, backRect);
             
-
             // Draws paddle
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
             e.Graphics.DrawRectangle(ballPen, paddle.x, paddle.y, paddle.width, paddle.height);
