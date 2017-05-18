@@ -36,6 +36,7 @@ namespace BrickBreaker.Screens
         int floorTimer = 0;
         int strongBallTimer = 0;
         int shroomsTimer = 0;
+        int shroomsControlTimer = 0;
         int blindfoldTimer = 0;
         double pointsMultiplier = 1;
         bool longPaddle = false;
@@ -43,6 +44,7 @@ namespace BrickBreaker.Screens
         bool isFloor = false;
         bool isStrongball = false;
         bool isShrooms = false;
+        bool isShroomsControls = false;
         bool isBlindfold = false;
 
         Paddle floorPaddle;
@@ -92,10 +94,7 @@ namespace BrickBreaker.Screens
 
         public void OnStart()
         {
-            //lives Images
-            Form1.heartImage1.BackgroundImage = Properties.Resources.life;
-            Form1.heartImage2.BackgroundImage = Properties.Resources.life;
-            Form1.heartImage3.BackgroundImage = Properties.Resources.life;
+           
 
             //Resets score
             Form1.currentScore = 0;
@@ -136,6 +135,7 @@ namespace BrickBreaker.Screens
             balls.Add(ball);
 
             //also added by Lake
+
             loadLevel("levels\\level1.xml");
 
             gameTimer.Enabled = true;
@@ -220,6 +220,40 @@ namespace BrickBreaker.Screens
 
         }
 
+        private void GameScreen_Load(object sender, EventArgs e)
+        {
+            //lives Images
+            Form1.heartImage1.BackgroundImage = Properties.Resources.life;
+            Form1.heartImage2.BackgroundImage = Properties.Resources.life;
+            Form1.heartImage3.BackgroundImage = Properties.Resources.life;
+             Form1.heartImage4.BackgroundImage = Properties.Resources.life;
+             Form1.heartImage5.BackgroundImage = Properties.Resources.life;
+            livesImages();
+        }
+
+        public void livesImages()
+        {
+            if (lives == 5)
+            {
+                Form1.heartImage5.BackgroundImage = Properties.Resources.life;
+            }
+            if (lives == 4)
+            {   Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage4.BackgroundImage = Properties.Resources.life;
+            }
+            if (lives == 3)
+            {
+                Form1.heartImage3.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage4.BackgroundImage = Properties.Resources.lostLife;
+            }
+            if (lives == 2)
+            {
+                Form1.heartImage3.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage2.BackgroundImage = Properties.Resources.life;
+            }
+            if (lives == 1) { Form1.heartImage2.BackgroundImage = Properties.Resources.lostLife; }
+        }
         public void manuel()
         {
             gameTimer.Enabled = false;
@@ -249,9 +283,13 @@ namespace BrickBreaker.Screens
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            Form1.scoreLabel.Text = "   Score: " + Form1.currentScore.ToString("000000") + " x" + pointsMultiplier;
+            Form1.levelLabel.Text = "Level: " + currentLevel;
+
+
             // Move the paddle
             //swaps controls when shrooms is active
-            if (isShrooms)
+            if (isShroomsControls)
             {
                 if (leftArrowDown && paddle.x < (this.Width - paddle.width))
                 {
@@ -338,11 +376,17 @@ namespace BrickBreaker.Screens
                 ballBrush.Color = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
                 paddleBrush.Color = Color.FromArgb(randomNum.Next(0, 255), randomNum.Next(0, 255), randomNum.Next(0, 255));
 
+                if (shroomsControlTimer >= 80 && isShroomsControls == false)
+                {
+                    isShroomsControls = true;
+                }
+
+                shroomsControlTimer++;
                 shroomsTimer--;
             }
             else if (shroomsTimer <= 0 && isShrooms == true)
             {
-                isShrooms = false;
+                isShrooms = isShroomsControls = false;
                 paddleBrush.Color = ballBrush.Color = Color.White;
 
             }
@@ -385,6 +429,9 @@ namespace BrickBreaker.Screens
                     if (ba.BlockCollision(b))
 
                     {
+                        //Play Sound
+                        Form1.brickPlayer.Play();
+
                         //decreases struck block hp and removes blocks with hp 0
                         if (isStrongball == true)
                         {
@@ -406,6 +453,7 @@ namespace BrickBreaker.Screens
                         if (blocks.Count == 0)
                         {
                             //added by Lake
+
                             #region Decide Wich Level To Load
                             totalLevels = Directory.GetFiles("levels", "*.xml", SearchOption.AllDirectories).Length;
                             currentLevel++;
@@ -416,7 +464,7 @@ namespace BrickBreaker.Screens
                             else
                             {
                                 OnEnd();
-                            }
+                             }
 
                             Thread.Sleep(1000);
 
@@ -444,8 +492,12 @@ namespace BrickBreaker.Screens
                     {
                         lives--;
 
+                        //Play Sound
+                        Form1.back_B_Player.Play();
+
                         //You suck! Lose all powerups!
                         ResetPowerups();
+
 
                         // Moves the ball back to origin
                         ba.x = ((paddle.x - (ba.size / 2)) + (paddle.width / 2));
@@ -453,8 +505,7 @@ namespace BrickBreaker.Screens
                     }
 
                     //lives Images
-                    if (lives == 2) { Form1.heartImage3.BackgroundImage = Properties.Resources.lostLife; }
-                    if (lives == 1) { Form1.heartImage2.BackgroundImage = Properties.Resources.lostLife; }
+                    livesImages();
 
                     if (lives == 0)
                     {
@@ -477,6 +528,8 @@ namespace BrickBreaker.Screens
         //Added by Lake
         public void loadLevel(string Level)
         {
+            if(lives > 5) { lives = 5; }
+
             //clear list of blocks
             blocks.Clear();
 
@@ -493,8 +546,8 @@ namespace BrickBreaker.Screens
             Color blockColour;
 
             int items = 1;
-
-            //extract info
+            //
+            //extract info  
             XmlTextReader reader = new XmlTextReader(Level);
 
             while (reader.Read())
@@ -529,7 +582,7 @@ namespace BrickBreaker.Screens
             }
             reader.Close();
         }
-
+        
         public void OnEnd()
         {
             Thread.Sleep(1000);
@@ -660,7 +713,6 @@ namespace BrickBreaker.Screens
                             isBlindfold = true;
                             break;
                     }
-
                     powerUps.Remove(p);
                     break;
                 }
@@ -669,8 +721,8 @@ namespace BrickBreaker.Screens
 
         public void ResetPowerups()
         {
-            longPaddle = isFloor = isMagnet = isStrongball = isShrooms = isBlindfold = false;
-            MagnetTimer = floorTimer = strongBallTimer = shroomsTimer = blindfoldTimer = 0;
+            longPaddle = isFloor = isMagnet = isStrongball = isShrooms = isShroomsControls = isBlindfold = false;
+            MagnetTimer = floorTimer = strongBallTimer = shroomsTimer = shroomsControlTimer = blindfoldTimer = 0;
             pointsMultiplier = 1;
 
             paddle.width = 80;

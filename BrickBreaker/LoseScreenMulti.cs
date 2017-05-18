@@ -7,22 +7,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-namespace BrickBreaker.Screens
+using BrickBreaker.Screens;
+//multiplayer lose screen by Daniel C
+namespace BrickBreaker
 {
-    public partial class InstructionScreen : UserControl
+    public partial class LoseScreenMulti : UserControl
     {
+        Boolean leftArrowDown, downArrowDown, rightArrowDown, upArrowDown, spaceDown, vDown, bDown, nDown;
 
-        int index = 0;
-        int lastIndex = 0;
+        int selected, lastSelected;
 
-        public InstructionScreen()
+        int index, lastIndex;
+
+        public LoseScreenMulti()
         {
             InitializeComponent();
-            this.DoubleBuffered = true;
+            onStart();
         }
 
-        private void InstructionScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        public void onStart()
+        {
+            if (GameScreenMulti.player1Won)
+            {
+                winnerLabel.Text = "Player 1 wins";
+            }
+            if (GameScreenMulti.player2Won)
+            {
+                winnerLabel.Text = "Player 2 wins";
+            }
+        }
+
+        private void LoseScreenMulti_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             lastIndex = index;
 
@@ -37,7 +52,6 @@ namespace BrickBreaker.Screens
                 ms.Location = new Point((form.Width - ms.Width) / 2, (form.Height - ms.Height) / 2);
             }
 
-            //so you can select the options by going left and right
             switch (e.KeyCode)
             {
                 case Keys.Right:
@@ -57,53 +71,52 @@ namespace BrickBreaker.Screens
                     }
                     break;
 
-                    //so you can select the option that is selected
                 case Keys.Space:
                     switch (index)
                     {
                         case 0:
-                            GameScreen gs = new GameScreen();
-                            Form form = this.FindForm();
-
-                            form.Controls.Add(gs);
-                            form.Controls.Remove(this);
-
-                            gs.Location = new Point((form.Width - gs.Width) / 2, (form.Height - gs.Height) / 2);
-                            break;
-                        case 1:
-                            //multiplayer screen but for now it is exit
-                            GameScreenMulti gsm = new GameScreenMulti();
                             Form f = this.FindForm();
+                            MenuScreen ms = new MenuScreen();
 
-                            f.Controls.Add(gsm);
+                            ms.Location = new Point((f.Width - ms.Width) / 2, (f.Height - ms.Height) / 2);
+
+                            f.Controls.Add(ms);
                             f.Controls.Remove(this);
 
-                            gsm.Location = new Point((f.Width - gsm.Width) / 2, (f.Height - gsm.Height) / 2);
                             break;
-                            
+                        case 1:
+                            Form form = this.FindForm();
+                            GameScreenMulti gsm = new GameScreenMulti();
+
+                            gsm.Location = new Point((form.Width - gsm.Width) / 2, (form.Height - gsm.Height) / 2);
+
+                            form.Controls.Add(gsm);
+                            form.Controls.Remove(this);
+
+                            break;
                     }
-                break;                 
-            }
-
-            //sets labels color to white if not selected
-            switch(lastIndex)
-            {
-                case 0:
-                    onePlayerLabel.ForeColor = Color.White;
-                    break;
-                case 1:
-                    secondPlayerLabel.ForeColor = Color.White;
                     break;
             }
 
-            //sets labels color to red if selected    
-            switch(index)
+
+            switch (lastIndex)
             {
                 case 0:
-                    onePlayerLabel.ForeColor = Color.Red;
+                    returnToMenuLabel.ForeColor = Color.White;
                     break;
                 case 1:
-                    secondPlayerLabel.ForeColor = Color.Red;
+                    playAgainLabel.ForeColor = Color.White;
+                    break;
+
+            }
+
+            switch (index)
+            {
+                case 0:
+                    returnToMenuLabel.ForeColor = Color.Red;
+                    break;
+                case 1:
+                    playAgainLabel.ForeColor = Color.Red;
                     break;
             }
         }
