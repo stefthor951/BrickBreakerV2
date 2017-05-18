@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace BrickBreaker.Screens
 {
@@ -19,6 +20,7 @@ namespace BrickBreaker.Screens
         public MenuScreen()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
         }
 
         private void MenuScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -53,17 +55,18 @@ namespace BrickBreaker.Screens
 
                         case 0:
                             InstructionScreen si = new InstructionScreen();
+                            si.Location = new Point((form.Width - si.Width) / 2, (form.Height - si.Height) / 2);
 
                             form.Controls.Add(si);
                             form.Controls.Remove(this);
 
-                            si.Location = new Point((form.Width - si.Width) / 2, (form.Height - si.Height) / 2);
                             break;
 
                         //highscore button
                         case 1:
-                            HighscoreScreen hs = new HighscoreScreen();
+                            Form1.select_B_Player.Play();
 
+                            HighscoreScreen hs = new HighscoreScreen();
                             form.Controls.Add(hs);
                             form.Controls.Remove(this);
 
@@ -73,6 +76,7 @@ namespace BrickBreaker.Screens
 
                         //option button
                         case 2:
+
                             OptionScreen os = new OptionScreen();
 
                             form.Controls.Add(os);
@@ -83,6 +87,8 @@ namespace BrickBreaker.Screens
 
                         //exit button
                         case 3:
+                            Form1.errorPlayer.Play();
+                            Thread.Sleep(1000);
                             Application.Exit();
                             break;
                     }
