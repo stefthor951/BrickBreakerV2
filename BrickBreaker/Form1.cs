@@ -61,9 +61,12 @@ namespace BrickBreaker
         public Form1()
         {
             InitializeComponent();
-            lives = 3;
-            paddleSpeed = 10;
-            xSpeed = ySpeed = 6;
+
+            if (BrickBreaker.OptionScreen.difficulty == 0) {
+                lives = 3;
+                paddleSpeed = 10;
+                xSpeed = ySpeed = 6;
+            }
 
             player1 = new System.Windows.Media.MediaPlayer();
             player1.Open(new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Resources/Select_A.wav")));
