@@ -21,6 +21,14 @@ namespace BrickBreaker.Screens
         {
             InitializeComponent();
             this.DoubleBuffered = true;
+            Form1.scoreLabel.Text = "";
+            Form1.levelLabel.Text = "";
+            Form1.heartImage1.BackgroundImage = null;
+            Form1.heartImage2.BackgroundImage = null;
+            Form1.heartImage3.BackgroundImage = null;
+            Form1.heartImage4.BackgroundImage = null;
+            Form1.heartImage1.BackgroundImage = null;
+
         }
 
         private void MenuScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -58,7 +66,6 @@ namespace BrickBreaker.Screens
                             si.Location = new Point((form.Width - si.Width) / 2, (form.Height - si.Height) / 2);
 
 
-                            InstructionScreen si = new InstructionScreen();
                             form.Controls.Add(si);
                             form.Controls.Remove(this);
 
