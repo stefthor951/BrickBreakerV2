@@ -222,12 +222,7 @@ namespace BrickBreaker.Screens
 
         private void GameScreen_Load(object sender, EventArgs e)
         {
-            //lives Images
-            Form1.heartImage1.BackgroundImage = Properties.Resources.life;
-            Form1.heartImage2.BackgroundImage = Properties.Resources.life;
-            Form1.heartImage3.BackgroundImage = Properties.Resources.life;
-             Form1.heartImage4.BackgroundImage = Properties.Resources.life;
-             Form1.heartImage5.BackgroundImage = Properties.Resources.life;
+            
             livesImages();
         }
 
@@ -236,6 +231,11 @@ namespace BrickBreaker.Screens
             if (lives == 5)
             {
                 Form1.heartImage5.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage1.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage2.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage3.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage4.BackgroundImage = Properties.Resources.life;
+
             }
             if (lives == 4)
             {   Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
@@ -246,13 +246,25 @@ namespace BrickBreaker.Screens
                 Form1.heartImage3.BackgroundImage = Properties.Resources.life;
                 Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
                 Form1.heartImage4.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage1.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage2.BackgroundImage = Properties.Resources.life;
             }
             if (lives == 2)
             {
                 Form1.heartImage3.BackgroundImage = Properties.Resources.lostLife;
                 Form1.heartImage2.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage1.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage4.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
             }
-            if (lives == 1) { Form1.heartImage2.BackgroundImage = Properties.Resources.lostLife; }
+            if (lives == 1)
+            {
+                Form1.heartImage2.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage3.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage4.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage1.BackgroundImage = Properties.Resources.life;
+            }
         }
         public void manuel()
         {
@@ -693,8 +705,9 @@ namespace BrickBreaker.Screens
                             isFloor = true;
                             floorTimer = 800;
                             break;
-                        case 4:
-                            lives++;
+                        case 4:                         
+                            if (lives <= 4) { lives++; }
+                            livesImages();
                             break;
                         case 5:
                             pointsMultiplier += 0.1;
