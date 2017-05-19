@@ -75,11 +75,13 @@ namespace BrickBreaker.Screens
                             Form1.select.Stop();
                             Form1.select.Play();
 
+
                             InstructionScreen si = new InstructionScreen();
+                            si.Location = new Point((form.Width - si.Width) / 2, (form.Height - si.Height) / 2);
+
                             form.Controls.Add(si);
                             form.Controls.Remove(this);
 
-                            si.Location = new Point((form.Width - si.Width) / 2, (form.Height - si.Height) / 2);
                             break;
 
                         //highscore button
