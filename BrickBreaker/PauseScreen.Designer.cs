@@ -39,7 +39,7 @@
             this.titleLabel.ForeColor = System.Drawing.Color.White;
             this.titleLabel.Location = new System.Drawing.Point(84, 87);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(227, 38);
+            this.titleLabel.Size = new System.Drawing.Size(98, 13);
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "QUIT THE GAME?";
             // 
