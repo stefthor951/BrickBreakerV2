@@ -45,8 +45,10 @@ namespace BrickBreaker
             {
 
                 //play sound
-                //Form1.player2.Stop();
-                Form1.player2.Play();
+
+                Form1.brickBounce.Stop();
+                Form1.brickBounce.Play();
+
 
                 if (x >= (b.x + b.width))
 
@@ -73,8 +75,9 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(paddleRec) && ticksSinceHit >= 10)
             {
-                //Play sound
-                Form1.paddlePlayer.Play();
+                //play sound
+                Form1.paddleBounce.Stop();
+                Form1.paddleBounce.Play();
 
                 Point intersect = intersectionRec.Location;
                 int intersectX = intersect.X;
@@ -121,8 +124,9 @@ namespace BrickBreaker
             // Collision with left wall
             if (x <= 0)
             {
-                //Play sound 
-                Form1.wallPlayer.Play();
+                //play sound
+                Form1.wallBounce.Stop();
+                Form1.wallBounce.Play();
 
                 xSpeed *= -1;
 
@@ -133,8 +137,9 @@ namespace BrickBreaker
             // Collision with right wall
             if (x >= (UC.Width - size))
             {
-                //Play sound 
-                Form1.wallPlayer.Play();
+                //play sound
+                Form1.wallBounce.Stop();
+                Form1.wallBounce.Play();
 
                 xSpeed *= -1;
 
@@ -144,9 +149,10 @@ namespace BrickBreaker
             }
             // Collision with top wall
             if (y <= 2)
-            {   
-                //Play sound 
-                Form1.wallPlayer.Play();
+            {
+                //play sound
+                Form1.wallBounce.Stop();
+                Form1.wallBounce.Play();
 
                 ySpeed *= -1;
 
@@ -162,6 +168,10 @@ namespace BrickBreaker
 
             if (y >= UC.Height)
             {
+                //play sound
+                Form1.gameOver.Stop();
+                Form1.gameOver.Play();
+
                 didCollide = true;
             }
 

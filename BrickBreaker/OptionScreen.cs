@@ -67,9 +67,14 @@ namespace BrickBreaker
         #region select difficulty
         private void easyButton_Click(object sender, EventArgs e)
         {
-            //BrickBreaker.Form1.select_A_Player = new SoundPlayer(Properties.Resources.Select_A);
+
+            //play sound
+            Form1.select.Stop();
+            Form1.select.Play();
+            difficultyLabel.Text = " -5 lives \n\n -Slower ball speed \n\n -faster paddle speed ";          
             difficultyLabel.ForeColor = Color.Yellow;
-            difficultyLabel.Text = " -5 lives \n\n -Slower ball speed \n\n -Faster paddle speed ";
+
+
             easyButton.BackColor = Color.Yellow;
             mediumButton.BackColor = Color.White;
             hardButton.BackColor = Color.White;
@@ -79,19 +84,34 @@ namespace BrickBreaker
 
         private void mediumButton_Click(object sender, EventArgs e)
         {
+
+            //play sound
+            Form1.select.Stop();
+            Form1.select.Play();
+
+            difficultyLabel.Text = " -3 lives \n\n -Medium ball speed \n\n -medium paddle speed";
+            
+
             difficultyLabel.ForeColor = Color.Orange;
-            difficultyLabel.Text = " -3 lives \n\n -Medium ball speed \n\n -Medium paddle speed";
+
             mediumButton.BackColor = Color.Orange;
             easyButton.BackColor = Color.White;
             hardButton.BackColor = Color.White;
             impossibleButton.BackColor = Color.White;
             difficulty = 2;
+
         }
 
         private void hardButton_Click(object sender, EventArgs e)
         {
+
+            //play sound
+            Form1.select.Stop();
+            Form1.select.Play();
+
             difficultyLabel.ForeColor = Color.Red;
             difficultyLabel.Text = " -2 life \n\n -Fast ball speed \n\n -Slow paddle speed";
+
             hardButton.BackColor = Color.Red;
             easyButton.BackColor = Color.White;
             mediumButton.BackColor = Color.White;
@@ -101,8 +121,14 @@ namespace BrickBreaker
 
         private void impossibleButton_Click(object sender, EventArgs e)
         {
+
+            //play sound
+            Form1.select.Stop();
+            Form1.select.Play();
+
             difficultyLabel.ForeColor = Color.Purple;
             difficultyLabel.Text = " -1 life \n\n -Fastest ball speed \n\n -Slowest paddle speed";
+
             impossibleButton.BackColor = Color.Purple;
             easyButton.BackColor = Color.White;
             mediumButton.BackColor = Color.White;

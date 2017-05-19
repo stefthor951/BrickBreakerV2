@@ -190,6 +190,11 @@ namespace BrickBreaker.Screens
                     spaceDown = true;
                     break;
                 case Keys.Escape:
+
+                    //play sound
+                    Form1.pick.Stop();
+                    Form1.pick.Play();
+
                     escapeDown = true;
                     manuel();
                     break;
@@ -443,9 +448,6 @@ namespace BrickBreaker.Screens
                     if (ba.BlockCollision(b))
 
                     {
-                        //Play Sound
-                        Form1.brickPlayer.Play();
-
                         //decreases struck block hp and removes blocks with hp 0
                         if (isStrongball == true)
                         {
@@ -506,9 +508,6 @@ namespace BrickBreaker.Screens
                     {
                         lives--;
 
-                        //Play Sound
-                        Form1.back_B_Player.Play();
-
                         //You suck! Lose all powerups!
                         ResetPowerups();
 
@@ -543,7 +542,7 @@ namespace BrickBreaker.Screens
         public void loadLevel(string Level)
         {
             if(lives > 5) { lives = 5; }
-
+            
             //clear list of blocks
             blocks.Clear();
 
