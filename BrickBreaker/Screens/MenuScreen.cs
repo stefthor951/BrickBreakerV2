@@ -20,6 +20,14 @@ namespace BrickBreaker.Screens
         public MenuScreen()
         {
             InitializeComponent();
+            OnStart();
+        }
+        
+        //added by mr. t
+        public void OnStart()
+        {
+            Form1.backroundMusic.Stop();
+            Form1.backroundMusic.Play();
         }
 
         private void MenuScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -30,6 +38,11 @@ namespace BrickBreaker.Screens
             switch (e.KeyCode)
             {
                 case Keys.Up:
+                    
+                    //play sound
+                    Form1.pick.Stop();
+                    Form1.pick.Play();
+
                     if (index != 0)
                         index--;
                     else
@@ -38,6 +51,11 @@ namespace BrickBreaker.Screens
                     }
                     break;
                 case Keys.Down:
+
+                    //play sound
+                    Form1.pick.Stop();
+                    Form1.pick.Play();
+
                     if (index != 3)
                         index++;
                     else
@@ -51,9 +69,11 @@ namespace BrickBreaker.Screens
                     switch (index)
                     {
                         //start button
-
                         case 0:
-                            Form1.back_A_Player.Play();
+
+                            //play sound
+                            Form1.select.Stop();
+                            Form1.select.Play();
 
                             InstructionScreen si = new InstructionScreen();
                             form.Controls.Add(si);
@@ -64,7 +84,10 @@ namespace BrickBreaker.Screens
 
                         //highscore button
                         case 1:
-                            Form1.select_B_Player.Play();
+
+                            //play sound
+                            Form1.select.Stop();
+                            Form1.select.Play();
 
                             HighscoreScreen hs = new HighscoreScreen();
                             form.Controls.Add(hs);
@@ -77,6 +100,10 @@ namespace BrickBreaker.Screens
                         //option button
                         case 2:
 
+                            //play sound
+                            Form1.select.Stop();
+                            Form1.select.Play();
+
                             OptionScreen os = new OptionScreen();
 
                             form.Controls.Add(os);
@@ -87,8 +114,12 @@ namespace BrickBreaker.Screens
 
                         //exit button
                         case 3:
-                            Form1.errorPlayer.Play();
+
+                            //play sound
+                            Form1.gameOver.Stop();
+                            Form1.gameOver.Play();
                             Thread.Sleep(1000);
+
                             Application.Exit();
                             break;
                     }
