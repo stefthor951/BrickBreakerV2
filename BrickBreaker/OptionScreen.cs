@@ -170,22 +170,14 @@ namespace BrickBreaker
             Form f = this.FindForm();
 
             BrickBreaker.Screens.MenuScreen ms = new BrickBreaker.Screens.MenuScreen();
-            f.Controls.Add(ms);
-
-            f.Controls.Remove(this);
-        }
-
-        private void menuButton_Click(object sender, EventArgs e)
-        {
-            Form f = this.FindForm();
-
-            BrickBreaker.Screens.MenuScreen ms = new BrickBreaker.Screens.MenuScreen();
 
             f.Controls.Add(ms);
             f.Controls.Remove(this);
 
             ms.Location = new Point((f.Width - ms.Width) / 2, (f.Height - ms.Height) / 2);
         }
+
+    
         
         private void OptionScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -222,6 +214,80 @@ namespace BrickBreaker
                     impossibleButton.ForeColor = Color.Red;
                     break;
             }
+        }
+
+        private void easyButton_Enter(object sender, EventArgs e)
+        {
+            if (difficulty != 1)
+            {
+                easyButton.BackColor = Color.Red;
+            }
+        }
+
+        private void easyButton_Leave(object sender, EventArgs e)
+        {
+            if (difficulty != 1)
+            {
+                easyButton.BackColor = Color.White;
+            }
+        }
+
+        private void mediumButton_Enter(object sender, EventArgs e)
+        {
+            if (difficulty != 2)
+            {
+                mediumButton.BackColor = Color.Red;
+            }
+        }
+
+        private void mediumButton_Leave(object sender, EventArgs e)
+        {
+            if (difficulty != 2)
+            {
+                mediumButton.BackColor = Color.White;
+            }
+        }
+
+        private void hardButton_Enter(object sender, EventArgs e)
+        {
+            if (difficulty != 3)
+            {
+                hardButton.BackColor = Color.Red;
+            }
+        }
+
+        private void hardButton_Leave(object sender, EventArgs e)
+        {
+            if (difficulty != 3)
+            {
+                hardButton.BackColor = Color.White;
+            }
+        }
+
+        private void impossibleButton_Enter(object sender, EventArgs e)
+        {
+            if (difficulty != 4)
+            {
+                impossibleButton.BackColor = Color.Red;
+            }
+        }
+
+        private void impossibleButton_Leave(object sender, EventArgs e)
+        {
+            if (difficulty != 4)
+            {
+                impossibleButton.BackColor = Color.White;
+            }
+        }
+
+        private void acceptButton_Enter(object sender, EventArgs e)
+        {
+            acceptButton.BackColor = Color.Red;
+        }
+
+        private void acceptButton_Leave(object sender, EventArgs e)
+        {
+            acceptButton.BackColor = Color.White;
         }
     }
 }

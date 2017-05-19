@@ -258,7 +258,7 @@ namespace BrickBreaker.Screens
         {
             gameTimer.Enabled = false;
 
-            DialogResult result = PauseScreen.Show("Return to the Main Menu?", "Yes", "No");
+            DialogResult result = PauseScreen.Show("Quit The Game?", "Yes", "No");
 
             switch (result)
             {
@@ -601,7 +601,7 @@ namespace BrickBreaker.Screens
         {
             Image backImage = BrickBreaker.Properties.Resources.texture4;           
             Rectangle backRect = new Rectangle((0 - 400) - paddle.x, 0, this.Width * 3, this.Height);
-            e.Graphics.DrawImage(backImage, backRect);
+         //   e.Graphics.DrawImage(backImage, backRect);
             
 
             // Draws paddle

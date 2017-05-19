@@ -94,10 +94,10 @@ namespace BrickBreaker.Screens
             switch (lastIndex)
             {
                 case 1:
-                    noLabel.ForeColor = Color.White;
+                    noLabel.ForeColor = Color.Black;
                     break;
                 case 2:
-                    yesLabel.ForeColor = Color.White;
+                    yesLabel.ForeColor = Color.Black;
                     break;
             }
 
