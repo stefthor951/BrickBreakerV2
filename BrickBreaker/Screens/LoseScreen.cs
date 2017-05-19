@@ -193,7 +193,7 @@ namespace BrickBreaker
                         Form1.select.Stop();
                         Form1.select.Play();
 
-                        Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(Form1.currentLevel), Convert.ToString(Form1.currentScore));
+                        Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(GameScreen.currentLevel), Convert.ToString(Form1.currentScore));
 
                         hs.save(hs);
                         hs.saveScores(Form1.highscoreList);
