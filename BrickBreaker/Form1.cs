@@ -51,7 +51,7 @@ namespace BrickBreaker
         //public static SoundPlayer player = new SoundPlayer(Properties.)
 
         public static List<Highscore> highscoreList = new List<Highscore>();
-        public static int currentScore, currentLevel, paddleSpeed, lives, xSpeed, ySpeed;
+        public static int currentScore, paddleSpeed, lives, xSpeed, ySpeed;
        
 
         // add a new comment
@@ -126,7 +126,7 @@ namespace BrickBreaker
             this.Controls.Add(ps);
             
             ps.Location = new Point((this.Width - ps.Width) / 2, (this.Height - ps.Height) /2);
-            //loadHighscores();
+            loadHighscores();
         }
 
         private void loadHighscores() //method for loading any saved highscores in the highscoreDB xml file

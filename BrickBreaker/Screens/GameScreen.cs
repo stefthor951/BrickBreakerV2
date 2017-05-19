@@ -58,10 +58,10 @@ namespace BrickBreaker.Screens
         Boolean leftArrowDown, downArrowDown, rightArrowDown, upArrowDown, spaceDown, escapeDown;
 
         // Game values
-        public static int lives, paddleSpeed, xSpeed, ySpeed, ticksSinceHit;
+        public static int lives, paddleSpeed, xSpeed, ySpeed, ticksSinceHit, currentLevel = 1;
 
-        int currentLevel = 1, totalLevels;
-
+        int totalLevels;
+        
         string levelToLoad;
 
 
@@ -222,12 +222,7 @@ namespace BrickBreaker.Screens
 
         private void GameScreen_Load(object sender, EventArgs e)
         {
-            //lives Images
-            Form1.heartImage1.BackgroundImage = Properties.Resources.life;
-            Form1.heartImage2.BackgroundImage = Properties.Resources.life;
-            Form1.heartImage3.BackgroundImage = Properties.Resources.life;
-             Form1.heartImage4.BackgroundImage = Properties.Resources.life;
-             Form1.heartImage5.BackgroundImage = Properties.Resources.life;
+            
             livesImages();
         }
 
@@ -236,6 +231,11 @@ namespace BrickBreaker.Screens
             if (lives == 5)
             {
                 Form1.heartImage5.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage1.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage2.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage3.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage4.BackgroundImage = Properties.Resources.life;
+
             }
             if (lives == 4)
             {   Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
@@ -246,13 +246,25 @@ namespace BrickBreaker.Screens
                 Form1.heartImage3.BackgroundImage = Properties.Resources.life;
                 Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
                 Form1.heartImage4.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage1.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage2.BackgroundImage = Properties.Resources.life;
             }
             if (lives == 2)
             {
                 Form1.heartImage3.BackgroundImage = Properties.Resources.lostLife;
                 Form1.heartImage2.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage1.BackgroundImage = Properties.Resources.life;
+                Form1.heartImage4.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
             }
-            if (lives == 1) { Form1.heartImage2.BackgroundImage = Properties.Resources.lostLife; }
+            if (lives == 1)
+            {
+                Form1.heartImage2.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage3.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage4.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage5.BackgroundImage = Properties.Resources.lostLife;
+                Form1.heartImage1.BackgroundImage = Properties.Resources.life;
+            }
         }
         public void manuel()
         {
@@ -283,8 +295,10 @@ namespace BrickBreaker.Screens
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+
             Form1.scoreLabel.Text = "   Score: " + Form1.currentScore.ToString("000000") + " x" + pointsMultiplier;
             Form1.levelLabel.Text = "Level: " + currentLevel;
+
 
 
             // Move the paddle
@@ -599,11 +613,7 @@ namespace BrickBreaker.Screens
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-            Image backImage = BrickBreaker.Properties.Resources.texture4;           
-            Rectangle backRect = new Rectangle((0 - 400) - paddle.x, 0, this.Width * 3, this.Height);
-         //   e.Graphics.DrawImage(backImage, backRect);
             
-
             // Draws paddle
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
             e.Graphics.DrawRectangle(ballPen, paddle.x, paddle.y, paddle.width, paddle.height);
@@ -693,8 +703,9 @@ namespace BrickBreaker.Screens
                             isFloor = true;
                             floorTimer = 800;
                             break;
-                        case 4:
-                            lives++;
+                        case 4:                         
+                            if (lives <= 4) { lives++; }
+                            livesImages();
                             break;
                         case 5:
                             pointsMultiplier += 0.1;
