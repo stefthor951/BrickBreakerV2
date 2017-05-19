@@ -270,7 +270,7 @@ namespace BrickBreaker.Screens
         {
             gameTimer.Enabled = false;
 
-            DialogResult result = PauseScreen.Show("Return to the Main Menu?", "Yes", "No");
+            DialogResult result = PauseScreen.Show("Quit The Game?", "Yes", "No");
 
             switch (result)
             {
