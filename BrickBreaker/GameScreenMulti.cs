@@ -89,9 +89,6 @@ namespace BrickBreaker
 
         public void OnStart()
         {
-            //play opening sound
-            Form1.disappearPlayer.Play();
-
             //display player hp's
             hpLabelp1.Text = "Player 1 HP: " + p1HP.ToString();
             hpLabelp2.Text = "Player 2 HP: " + p2HP.ToString();

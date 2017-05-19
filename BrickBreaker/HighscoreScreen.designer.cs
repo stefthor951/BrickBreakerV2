@@ -35,11 +35,11 @@
             // scoreTitle
             // 
             this.scoreTitle.BackColor = System.Drawing.Color.Transparent;
-            this.scoreTitle.Font = new System.Drawing.Font("Kozuka Gothic Pro B", 50.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scoreTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 50.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scoreTitle.ForeColor = System.Drawing.Color.DarkRed;
             this.scoreTitle.Location = new System.Drawing.Point(198, 24);
             this.scoreTitle.Name = "scoreTitle";
-            this.scoreTitle.Size = new System.Drawing.Size(404, 90);
+            this.scoreTitle.Size = new System.Drawing.Size(410, 90);
             this.scoreTitle.TabIndex = 0;
             this.scoreTitle.Text = "High Scores";
             // 

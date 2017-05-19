@@ -36,30 +36,33 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.ForeColor = System.Drawing.Color.White;
-            this.titleLabel.Location = new System.Drawing.Point(84, 87);
+            this.titleLabel.Font = new System.Drawing.Font("Kozuka Gothic Pro B", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.ForeColor = System.Drawing.Color.Black;
+            this.titleLabel.Location = new System.Drawing.Point(28, 47);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(227, 38);
+            this.titleLabel.Size = new System.Drawing.Size(242, 41);
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "QUIT THE GAME?";
             // 
             // yesLabel
             // 
             this.yesLabel.AutoSize = true;
-            this.yesLabel.ForeColor = System.Drawing.Color.White;
-            this.yesLabel.Location = new System.Drawing.Point(84, 146);
+            this.yesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yesLabel.ForeColor = System.Drawing.Color.Red;
+            this.yesLabel.Location = new System.Drawing.Point(61, 105);
             this.yesLabel.Name = "yesLabel";
-            this.yesLabel.Size = new System.Drawing.Size(25, 13);
+            this.yesLabel.Size = new System.Drawing.Size(64, 31);
             this.yesLabel.TabIndex = 3;
             this.yesLabel.Text = "Yes";
             // 
             // noLabel
             // 
             this.noLabel.AutoSize = true;
-            this.noLabel.ForeColor = System.Drawing.Color.White;
-            this.noLabel.Location = new System.Drawing.Point(178, 146);
+            this.noLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noLabel.ForeColor = System.Drawing.Color.Black;
+            this.noLabel.Location = new System.Drawing.Point(165, 105);
             this.noLabel.Name = "noLabel";
-            this.noLabel.Size = new System.Drawing.Size(21, 13);
+            this.noLabel.Size = new System.Drawing.Size(51, 31);
             this.noLabel.TabIndex = 4;
             this.noLabel.Text = "No";
             // 
@@ -67,8 +70,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(284, 163);
             this.Controls.Add(this.noLabel);
             this.Controls.Add(this.yesLabel);
             this.Controls.Add(this.titleLabel);

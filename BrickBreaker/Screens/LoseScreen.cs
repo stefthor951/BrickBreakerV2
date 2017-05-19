@@ -163,6 +163,9 @@ namespace BrickBreaker
 
                     if (spaceDown == true)
                     {
+                        //play sound
+                        Form1.select.Stop();
+                        Form1.select.Play();
 
                         Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(GameScreen.currentLevel), Convert.ToString(Form1.currentScore));
                         hs.save(hs);
@@ -185,7 +188,13 @@ namespace BrickBreaker
 
                     if (spaceDown == true)
                     {
+
+                        //play sound
+                        Form1.select.Stop();
+                        Form1.select.Play();
+
                         Highscore hs = new Highscore(nameText1.Text + nameText2.Text + nameText3.Text, Convert.ToString(GameScreen.currentLevel), Convert.ToString(Form1.currentScore));
+
                         hs.save(hs);
                         hs.saveScores(Form1.highscoreList);
 
