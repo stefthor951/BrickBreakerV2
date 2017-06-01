@@ -16,6 +16,7 @@ namespace BrickBreaker.Screens
         //indexs for the button clicks
         int index = 0;
         int lastIndex = 0;
+        bool upKeyDown, downKeyDown;
 
         public MenuScreen()
         {
@@ -38,29 +39,35 @@ namespace BrickBreaker.Screens
             switch (e.KeyCode)
             {
                 case Keys.Up:
-                    
-                    //play sound
-                    Form1.pick.Stop();
-                    Form1.pick.Play();
-
-                    if (index != 0)
-                        index--;
-                    else
+                    if (upKeyDown == false)
                     {
-                        index = 3;
+                        upKeyDown = true;
+                        //play sound
+                        Form1.pick.Stop();
+                        Form1.pick.Play();
+
+                        if (index != 0)
+                            index--;
+                        else
+                        {
+                            index = 3;
+                        }
                     }
                     break;
                 case Keys.Down:
-
-                    //play sound
-                    Form1.pick.Stop();
-                    Form1.pick.Play();
-
-                    if (index != 3)
-                        index++;
-                    else
+                    if (downKeyDown == false)
                     {
-                        index = 0;
+                        downKeyDown = true;
+                        //play sound
+                        Form1.pick.Stop();
+                        Form1.pick.Play();
+
+                        if (index != 3)
+                            index++;
+                        else
+                        {
+                            index = 0;
+                        }
                     }
                     break;
 
@@ -171,6 +178,19 @@ namespace BrickBreaker.Screens
             form.Controls.Add(os);
             form.Controls.Remove(this);
 
+        }
+
+        private void MenuScreen_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    upKeyDown = false;
+                    break;
+                case Keys.Down:
+                    downKeyDown = false;
+                    break;
+            }
         }
     }
 }
